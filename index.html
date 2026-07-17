@@ -1,0 +1,657 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DataDID 运营管理平台</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-spark">✣</span>
+        <span>DataDID Ops</span>
+      </div>
+
+      <nav class="nav">
+        <p>CONTROL</p>
+        <button class="nav-item" data-page="workspace"><span>⌁</span>工作台</button>
+        <button class="nav-item" data-page="regular"><span>□</span>常规盲盒</button>
+        <button class="nav-item active" data-page="activityManage"><span>▤</span>活动管理</button>
+        <button class="nav-item" data-page="activity"><span>◇</span>活动配置</button>
+        <button class="nav-item" data-page="inventory"><span>◒</span>奖品库存</button>
+        <button class="nav-item" data-page="analytics"><span>▥</span>数据看板</button>
+        <p>SYSTEM</p>
+        <button class="nav-item" data-page="logs"><span>⊙</span>操作日志</button>
+        <button class="nav-item" data-page="notice"><span>✉</span>公告推送</button>
+      </nav>
+
+      <div class="profile">
+        <div class="avatar"></div>
+        <div>
+          <strong>@datadid_ops</strong>
+          <span>ADMIN</span>
+        </div>
+      </div>
+      <footer>© 2026 DataDID Operation Platform</footer>
+    </aside>
+
+    <main class="main">
+      <header class="page-head">
+        <h1 id="pageTitle">活动管理</h1>
+        <p id="pageSub">盲盒 / 拉新 / 留存活动的创建、配置与生命周期管理。</p>
+      </header>
+
+      <section class="page" id="workspace">
+        <div class="toolbar">
+          <div class="segmented">
+            <button class="active">今日</button>
+            <button>7 天</button>
+            <button>30 天</button>
+            <button>自定义</button>
+          </div>
+          <button class="primary">导出概览</button>
+        </div>
+        <div class="metrics">
+          <article><span>发放盲盒次数</span><strong>3,428</strong><small>常规 2,910 / 活动 518</small></article>
+          <article><span>盲盒抽取次数</span><strong>2,176</strong><small>较昨日 +12.4%</small></article>
+          <article><span>积分发放量</span><strong>186K</strong><small>即时到账</small></article>
+          <article><span>待核验中奖</span><strong>26</strong><small>自动项 18 / 人工项 8</small></article>
+          <article><span>待发放奖励</span><strong>14</strong><small>USDT 11 / 榜单 3</small></article>
+          <article><span>即将耗尽奖品</span><strong>5</strong><small>低于预警阈值</small></article>
+        </div>
+        <div class="content-grid">
+          <section class="panel wide">
+            <div class="panel-head">
+              <div><h2>待办提醒</h2><p>按优先级自动排序，可分配处理人与标记完成。</p></div>
+              <button class="ghost">查看全部</button>
+            </div>
+            <div class="todo-list">
+              <div class="todo danger"><b>奖励发放失败</b><span>USDT 交易未确认 · 3 条</span><em>高</em></div>
+              <div class="todo danger"><b>异常用户疑似刷量</b><span>同设备多账号邀请聚集 · 12 人</span><em>高</em></div>
+              <div class="todo warn"><b>活动尚未完成配置</b><span>Summer DID Rush 缺少领奖核验</span><em>中</em></div>
+              <div class="todo"><b>奖品库存低于预警值</b><span>300U 档位剩余 2 / 阈值 5</span><em>低</em></div>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <section class="page" id="regular">
+        <div class="regular-shell">
+          <div class="regular-header">
+            <div class="analytics-metrics regular-metrics">
+              <article><span>启用中规则</span><strong>7</strong><small>成就解锁 6 · 积分兑换 1</small></article>
+              <article><span>今日发放盒数</span><strong>179,880</strong><small>常规盲盒（不含活动盲盒）</small></article>
+              <article><span>今日兑换消耗积分</span><strong class="green-text">412,600</strong><small>Consume 200 Points × 2,063 次</small></article>
+              <article><span>Reward Center 同步</span><strong class="green-text">正常</strong><small>规则变更实时同步用户端条目</small></article>
+            </div>
+          </div>
+
+          <section class="panel regular-rule-panel">
+            <div class="regular-rule-title">
+              <div>
+                <h2>成就解锁类规则（Achievement Unlock）</h2>
+                <p>完成任务获得盲盒；名称与排序同步用户端 Reward Center 展示</p>
+              </div>
+              <button class="primary" id="regularRuleOpen">+ 新增规则</button>
+            </div>
+            <div class="regular-rule-table achievement">
+              <div class="regular-rule-head"><span>排序</span><span>用户端条目</span><span>触发行为 / 校验方式</span><span>获得盒数</span><span>单用户上限</span><span>绑定权重组</span><span>状态</span><span>操作</span></div>
+              <div><input value="1" /><b>Online Rewards<small>在线奖励</small></b><span>达到累计在线时长 · 自动校验</span><input value="1" /><input value="每日 1 次" /><select><option>A · 免费盲盒</option></select><span class="switch on"></span><button class="ghost mini">编辑</button></div>
+              <div><input value="2" /><b>Continuous Check-In<small>连续签到</small></b><span>连续签到 7 天达标 · 自动校验</span><input value="1" /><input value="每 7 天 1 次" /><select><option>A · 免费盲盒</option></select><span class="switch on"></span><button class="ghost mini">编辑</button></div>
+              <div><input value="3" /><b>Invite Friends<small>邀请好友</small></b><span>新用户绑定邀请人的邀请码</span><input value="1" /><input value="不封顶" /><select><option>A · 免费盲盒</option></select><span class="switch on"></span><button class="ghost mini">编辑</button></div>
+              <div><input value="4" /><b>Link Social Account<small>绑定社交账号</small></b><span>完成社交账号绑定 · 自动校验</span><input value="1" /><input value="每账号 1 次" /><select><option>A · 免费盲盒</option></select><span class="switch on"></span><button class="ghost mini">编辑</button></div>
+              <div><input value="5" /><b>Create DID<small>创建 DID</small></b><span>用户成功创建 DID · 自动校验</span><input value="1" /><input value="1 次" /><select><option>A · 免费盲盒</option></select><span class="switch on"></span><button class="ghost mini">编辑</button></div>
+              <div><input value="6" /><b>Points To 10K<small>积分达到 1 万</small></b><span>累计积分达到阈值 · 自动校验</span><input value="1" /><input value="1 次" /><select><option>A · 免费盲盒</option></select><span class="switch on"></span><button class="ghost mini">编辑</button></div>
+            </div>
+          </section>
+
+          <section class="panel regular-rule-panel">
+            <div class="regular-rule-title">
+              <div>
+                <h2>积分兑换类规则（Redeem with Points）</h2>
+                <p>消耗积分兑换盲盒；必须绑定高档倾斜权重组，保证兑换回报率 ≥ 100%</p>
+              </div>
+            </div>
+            <div class="regular-rule-table redeem">
+              <div class="regular-rule-head"><span>排序</span><span>用户端条目</span><span>消耗 / 校验方式</span><span>获得盒数</span><span>单用户上限</span><span>绑定权重组</span><span>状态</span><span>操作</span></div>
+              <div><input value="1" /><b>Consume 200 Points<small>消耗 200 积分兑换</small></b><span>扣减 200 积分成功后发放</span><input value="1" /><input value="每日 5 次" /><select><option>B · 200 积分兑换（回报率≥100%）</option></select><span class="switch on"></span><button class="ghost mini">编辑</button></div>
+            </div>
+            <p class="regular-check">校验：兑换类规则绑定的权重组回报率低于 100% 时阻断启用；权重组高档库存耗尽导致回报率跌破 100% 时自动暂停兑换入口并生成待办。</p>
+          </section>
+
+          <section class="panel regular-note-card regular-inventory-link">
+            <div class="regular-note-icon">📦</div>
+            <div>
+              <h2>常规奖池的库存与抽中权重</h2>
+              <p>档位库存、预警阈值、按盲盒来源分组的权重（免费盒 / 兑换盒）统一在「奖品库存 · 常规盲盒奖池」维护，避免两处配置不一致。</p>
+            </div>
+            <button class="ghost mini regular-go-inventory" type="button">前往奖品库存</button>
+          </section>
+        </div>
+      </section>
+
+      <section class="page active" id="activityManage">
+        <div class="manage-shell">
+          <div class="manage-header">
+            <div class="analytics-metrics manage-metrics">
+              <article><span>进行中活动</span><strong>1</strong><small>插件评论活动 · 7月23日截止</small></article>
+              <article><span>累计抽奖次数</span><strong>5,520,954</strong><small>全部活动</small></article>
+              <article><span>USDT 累计发放</span><strong class="amber">1,900</strong><small>22 名中奖用户</small></article>
+              <article><span>积分累计发放</span><strong class="green-text">1.47 亿</strong><small>实时到账</small></article>
+            </div>
+          </div>
+
+          <div class="manage-action-row">
+            <button class="primary manage-new">+ 新建活动</button>
+          </div>
+
+          <section class="panel manage-panel">
+            <div class="manage-filters">
+              <input placeholder="搜索活动名称..." />
+              <div class="segmented compact">
+                <button class="active">全部</button>
+                <button>进行中</button>
+                <button>草稿</button>
+                <button>已结束</button>
+              </div>
+            </div>
+
+            <div class="manage-table">
+              <div class="manage-head"><span>活动名称</span><span>状态</span><span>活动时间（UTC）</span><span>奖池预算（USDT + 积分）</span><span>抽奖次数</span><span>奖品消耗</span><span>操作</span></div>
+              <div>
+                <div><b>DataDID Plugin Review Campaign</b><small>插件评分评论 · Chrome / Google Play</small><em class="type-badge nft">盲盒</em></div>
+                <span class="status-pill live">进行中</span>
+                <strong>06-24 ~ 07-23</strong>
+                <p><b>200 USDT</b><br /><span>+ 200 积分/人（安装账号）</span></p>
+                <strong>-</strong>
+                <i class="progress purple" style="--w: 8%"></i>
+                <div class="row-actions"><button class="ghost mini manage-edit">编辑</button><button class="ghost mini manage-data" data-activity-name="DataDID Plugin Review Campaign">数据</button></div>
+              </div>
+              <div>
+                <div><b>POC Ranking #R1 积分排行榜</b><small>月度积分排行 · Top 100 瓜分 800 USDT + 5.9 万积分 · 榜单每日更新</small><em class="type-badge points">排行榜</em></div>
+                <span class="status-pill ended">已结束</span>
+                <strong>05-26 ~ 06-25</strong>
+                <p><b>800 USDT</b><br /><span>+ 5.9万 积分</span></p>
+                <strong>-</strong>
+                <i class="progress green" style="--w: 100%"></i>
+                <div class="row-actions"><button class="ghost mini manage-data" data-activity-name="POC Ranking #R1 积分排行榜">数据</button></div>
+              </div>
+              <div>
+                <div><b>DataDID 盲盒狂欢季</b><small>安装插件 + 注册 + 拉新 · $2000 奖池</small><em class="type-badge nft">盲盒</em></div>
+                <span class="status-pill ended">已结束</span>
+                <strong>04-14 ~ 05-13</strong>
+                <p><b>2,000 USDT</b><br /><span>+ 积分保底池（不限量）</span></p>
+                <strong>5,520,954</strong>
+                <i class="progress amber" style="--w: 72%"></i>
+                <div class="row-actions"><button class="ghost mini manage-data" data-activity-name="DataDID 盲盒狂欢季">数据</button></div>
+              </div>
+              <div>
+                <div><b>AliveCheck 安心守护季</b><small>订阅 AliveCheck 抽盲盒 · 1000 USDT 奖池</small><em class="type-badge nft">盲盒</em></div>
+                <span class="status-pill ended">已结束</span>
+                <strong>02-06 ~ 03-06</strong>
+                <p><b>1,000 USDT</b><br /><span>+ 积分保底池（不限量）</span></p>
+                <strong>812,340</strong>
+                <i class="progress amber" style="--w: 68%"></i>
+                <div class="row-actions"><button class="ghost mini manage-data" data-activity-name="AliveCheck 安心守护季">数据</button></div>
+              </div>
+              <div>
+                <div><b>MEMO DataDID 圣诞狂欢季</b><small>拉新赢大奖 · 最高 500 USDT · 含 1 次延期</small><em class="type-badge nft">盲盒</em></div>
+                <span class="status-pill ended">已结束</span>
+                <strong>2025-12-23 ~ 01-23</strong>
+                <p><b>1,100 USDT</b><br /><span>+ 257.5万 积分（含追加）</span></p>
+                <strong>3,904,177</strong>
+                <i class="progress amber" style="--w: 100%"></i>
+                <div class="row-actions"><button class="ghost mini manage-data" data-activity-name="MEMO DataDID 圣诞狂欢季">数据</button></div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <section class="page" id="activity">
+        <div class="activity-shell">
+          <div class="activity-top">
+            <button class="activity-type active" data-type="box">
+              <span class="type-icon">🎁</span>
+              <span class="type-copy"><strong>盲盒抽奖</strong><small>配置获取条件、奖池与中奖验证，用户抽盲盒赢 USDT / 积分</small></span>
+              <i></i>
+            </button>
+            <button class="activity-type" data-type="rank">
+              <span class="type-icon">🏆</span>
+              <span class="type-copy"><strong>积分排行榜</strong><small>配置排行规则、名次奖励与门槛，前 N 名瓜分奖池</small></span>
+              <i></i>
+            </button>
+          </div>
+
+          <div class="activity-summary" id="activitySummary"></div>
+
+          <div class="activity-steps" id="activitySteps"></div>
+
+          <section class="activity-card" id="activityPanel"></section>
+
+          <div class="activity-footer">
+            <span>完成第 5 步「页面与推送」的配置后可发布活动</span>
+            <div>
+              <button class="ghost">保存草稿</button>
+              <button class="ghost">预览</button>
+              <button class="primary publish-action hidden" id="activityPublish">发布活动</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="page" id="inventory">
+        <div class="inventory-shell">
+          <div class="analytics-toolbar">
+            <div>
+              <h2>奖品库存管理</h2>
+              <p>常规盲盒与活动盲盒奖池独立统计，互不占用；总数量 = 初始数量 + 累计追加，追加明细写入操作日志。</p>
+            </div>
+            <button class="ghost">导出</button>
+          </div>
+
+          <div class="analytics-metrics inventory-metrics">
+            <article><span>在池档位数</span><strong>10</strong><small>常规 5 · 活动 5（已摘除档不计）</small></article>
+            <article><span>库存预警档位</span><strong class="amber">2</strong><small>低于预警阈值 · 已生成待办</small></article>
+            <article><span>今日抽取次数</span><strong>184,205</strong><small>常规 179,880 · 活动 4,325</small></article>
+            <article><span>作废回收（本周）</span><strong class="green-text">+1</strong><small>核验逾期作废，剩余数量 +1</small></article>
+          </div>
+
+          <div class="inventory-tabs">
+            <button class="active" data-inventory-tab="regular">📦 常规盲盒奖池</button>
+            <button data-inventory-tab="event">🎁 活动盲盒奖池</button>
+          </div>
+
+          <section class="panel inventory-panel active" id="inventoryRegular">
+            <div class="panel-head">
+              <div><h2>常规盲盒奖池 <span class="dot-ok"></span></h2><p>长期有效 · 6 个档位 · 无固定结束时间</p></div>
+              <p class="panel-hint">进行中奖池仅允许追加，不允许调减；追加操作写入日志。</p>
+            </div>
+            <div class="analytics-table inventory-table regular-inventory">
+              <div class="analytics-head"><span>奖品档位</span><span>类型</span><span>数量类型</span><span>初始数量</span><span>累计追加</span><span>总数量</span><span>已抽取</span><span>剩余</span><span>消耗进度</span><span>预警阈值</span><span>状态</span><span>操作</span></div>
+              <div><b>10 Points</b><span class="type-badge points">积分</span><span class="type-badge points">无限 · 保底</span><span>-</span><span>-</span><span>无限</span><strong>3,616,227</strong><span>无限</span><i class="progress green" style="--w:100%"></i><span>-</span><em class="inv-ok">启用</em><button class="ghost mini" disabled>保底档</button></div>
+              <div><b>50 Points</b><span class="type-badge points">积分</span><span class="type-badge points">无限 · 保底</span><span>-</span><span>-</span><span>无限</span><strong>1,758,386</strong><span>无限</span><i class="progress green" style="--w:100%"></i><span>-</span><em class="inv-ok">启用</em><button class="ghost mini" disabled>保底档</button></div>
+              <div><b>100 Points</b><span class="type-badge points">积分</span><span class="type-badge points">无限 · 保底</span><span>-</span><span>-</span><span>无限</span><strong>11,808</strong><span>无限</span><i class="progress green" style="--w:100%"></i><span>-</span><em class="inv-ok">启用</em><button class="ghost mini" disabled>保底档</button></div>
+              <div><b>500 Points</b><span class="type-badge points">积分</span><span class="type-badge pendant">有限</span><span>211</span><span>0</span><span>211</span><strong>211</strong><span>0</span><i class="progress purple" style="--w:100%"></i><input value="21" /><em class="inv-off">已摘除</em><button class="ghost mini inventory-add" data-prize="500 Points" data-type="积分" data-current="211" data-drawn="211" data-left="0">追加</button></div>
+              <div><b>1000 Points</b><span class="type-badge points">积分</span><span class="type-badge pendant">有限</span><span>25</span><span>0</span><span>25</span><strong>25</strong><span>0</span><i class="progress purple" style="--w:100%"></i><input value="3" /><em class="inv-off">已摘除</em><button class="ghost mini inventory-add" data-prize="1000 Points" data-type="积分" data-current="25" data-drawn="25" data-left="0">追加</button></div>
+              <div><b>Avatar Pendant</b><span class="type-badge pendant">挂件</span><span class="type-badge pendant">有限</span><span>9,831</span><span>0</span><span>9,831</span><strong>9,831</strong><span>0</span><i class="progress purple" style="--w:100%"></i><input value="980" /><em class="inv-off">已摘除</em><button class="ghost mini inventory-add" data-prize="Avatar Pendant" data-type="挂件" data-current="9,831" data-drawn="9,831" data-left="0">追加</button></div>
+            </div>
+            <p class="inventory-rule">校验规则：数量不得小于已抽取次数；有限档剩余为 0 自动摘除并由保底档兜底；库存回补仅通过中奖记录作废回收路径。</p>
+          </section>
+
+          <section class="panel inventory-panel" id="inventoryEvent">
+            <div class="panel-head">
+              <div>
+                <h2>活动盲盒奖池</h2>
+                <p>选择活动奖池后按开始时间倒序展示，默认最新活动。</p>
+              </div>
+              <label class="inventory-select">选择活动奖池<select><option>DataDID 盲盒狂欢季 · 进行中（04-14 ~ 05-14）</option></select></label>
+            </div>
+            <div class="analytics-table inventory-table event-inventory">
+              <div class="analytics-head"><span>奖品档位</span><span>类型</span><span>数量类型</span><span>初始数量</span><span>累计追加</span><span>总数量</span><span>已抽取</span><span>剩余</span><span>消耗进度</span><span>预警阈值</span><span>状态</span><span>操作</span></div>
+              <div><b>20 USDT</b><span class="type-badge usdt">USDT</span><span class="type-badge pendant">有限</span><span>50</span><span class="green-text">+5</span><span>55</span><strong>13</strong><span>42</span><i class="progress amber" style="--w:24%"></i><input value="6" /><em class="inv-ok">启用</em><button class="ghost mini inventory-add" data-prize="20 USDT" data-type="USDT" data-current="55" data-drawn="13" data-left="42">追加</button></div>
+              <div><b>100 USDT</b><span class="type-badge usdt">USDT</span><span class="type-badge pendant">有限</span><span>6</span><span>0</span><span>6</span><strong>6</strong><span>0</span><i class="progress amber" style="--w:100%"></i><input value="1" /><em class="inv-off">已摘除</em><button class="ghost mini inventory-add" data-prize="100 USDT" data-type="USDT" data-current="6" data-drawn="6" data-left="0">追加</button></div>
+              <div><b>200 USDT</b><span class="type-badge usdt">USDT</span><span class="type-badge pendant">有限</span><span>5</span><span>0</span><span>5</span><strong>5</strong><span>0</span><i class="progress amber" style="--w:100%"></i><input value="1" /><em class="inv-off">已摘除</em><button class="ghost mini inventory-add" data-prize="200 USDT" data-type="USDT" data-current="5" data-drawn="5" data-left="0">追加</button></div>
+              <div><b>300 USDT</b><span class="type-badge usdt">USDT</span><span class="type-badge pendant">有限</span><span>2</span><span>0</span><span>2</span><strong>1</strong><span>1 ⚠</span><i class="progress amber" style="--w:50%"></i><input value="1" /><em class="inv-warn">库存预警</em><button class="ghost mini inventory-add" data-prize="300 USDT" data-type="USDT" data-current="2" data-drawn="1" data-left="1">追加</button></div>
+              <div><b>labubu blind box</b><span class="type-badge gift">实物</span><span class="type-badge pendant">有限</span><span>11</span><span>0</span><span>11</span><strong>1</strong><span>10</span><i class="progress blue" style="--w:9%"></i><input value="2" /><em class="inv-ok">启用</em><button class="ghost mini inventory-add" data-prize="labubu blind box" data-type="实物" data-current="11" data-drawn="1" data-left="10">追加</button></div>
+              <div><b>NFT</b><span class="type-badge nft">NFT</span><span class="type-badge pendant">有限</span><span>13</span><span>0</span><span>13</span><strong>3</strong><span>10</span><i class="progress purple" style="--w:23%"></i><input value="2" /><em class="inv-ok">启用</em><button class="ghost mini inventory-add" data-prize="NFT" data-type="NFT" data-current="13" data-drawn="3" data-left="10">追加</button></div>
+              <div><b>10 Points</b><span class="type-badge points">积分</span><span class="type-badge points">无限 · 保底</span><span>-</span><span>-</span><span>无限</span><strong>1,842,110</strong><span>无限</span><i class="progress green" style="--w:100%"></i><span>-</span><em class="inv-ok">启用</em><button class="ghost mini" disabled>保底档</button></div>
+            </div>
+            <p class="inventory-rule">活动进行中仅允许追加，不允许调减；库存低于预警阈值将生成待办，追加提交后写入操作日志。</p>
+          </section>
+
+          <section class="panel inventory-panel weight-panel active" id="weightPanel">
+            <div class="panel-head">
+              <div><h2>抽中权重配置（按盲盒来源分组）</h2><p>同一奖池、共享库存，不同盲盒来源绑定不同权重组；运营只配权重，概率由系统实时计算。</p></div>
+              <button class="ghost">+ 新增权重组</button>
+            </div>
+            <div class="weight-grid">
+              <div class="weight-head"><span>奖品档位</span><span>库存状态</span><span>权重组 A · 免费盲盒<small>绑定：签到 / 邀请 / 任务 / 创建 DID</small></span><span>权重组 B · 200 积分兑换盲盒<small>绑定：消耗 200 积分兑换</small></span></div>
+              <div><b>10 Points</b><span class="type-badge points">无限</span><label><input value="60" />%</label><label><input value="0" />%<small>已排除（最低档不投放）</small></label></div>
+              <div><b>50 Points</b><span class="type-badge points">无限</span><label><input value="25" />%</label><label><input value="25" />%</label></div>
+              <div><b>100 Points</b><span class="type-badge points">无限</span><label><input value="10" />%</label><label><input value="38" />%</label></div>
+              <div><b>200 Points<small>回本档 · 建议新增</small></b><span class="type-badge points">无限</span><label><input value="0" />%<small>免费盒不投放</small></label><label><input value="24" />%<small>面值 = 消耗额，抬升「不亏」频次</small></label></div>
+              <div><b>500 Points</b><span class="type-badge pendant">有限 · 剩 0</span><label><input value="4" />%</label><label><input value="10" />%</label></div>
+              <div><b>1000 Points</b><span class="type-badge pendant">有限 · 剩 0</span><label><input value="1" />%</label><label><input value="3" />%</label></div>
+              <div class="weight-total"><span>权重合计（须为 100%）</span><span></span><strong>100%</strong><strong>100%</strong></div>
+              <div class="weight-total"><span>期望产出（系统计算）</span><span></span><strong>58.5 积分</strong><strong>178.5 积分</strong></div>
+              <div class="weight-total"><span>获取成本 / 回报率</span><span></span><strong>免费 / -</strong><strong>200 积分 / 89%</strong></div>
+              <div class="weight-total"><span>目标回报率（组级可配，不要求保本）</span><span></span><strong>-</strong><label><input value="80" />%<small>低于目标橙色预警</small></label></div>
+              <div class="weight-total"><span>保底最低档位</span><span></span><select><option>10 Points</option></select><select><option>50 Points</option></select></div>
+              <div class="weight-total"><span>保底触发（Pity · 保护高频用户）</span><span></span><strong>-</strong><span>连续 <input value="10" /> 次未中 ≥ <select><option>500 Points</option><option>1000 Points</option></select> → 下次必中</span></div>
+            </div>
+            <p class="inventory-rule">系统校验与风险提示：每个权重组合计须为 100%；兑换盒不要求保本，运营为消耗类权重组设定目标回报率，实际回报率低于目标时橙色预警并需确认；权重组内有限高档库存耗尽时，剩余权重自动归一化并触发预警。</p>
+          </section>
+        </div>
+      </section>
+
+      <section class="page" id="analytics">
+        <div class="analytics-shell">
+          <div class="analytics-toolbar">
+            <div>
+              <h2>数据看板</h2>
+              <p>盲盒活动看奖池消耗与中奖名单；排行榜活动看榜单快照、门槛核验与发放进度。</p>
+            </div>
+            <button class="ghost">导出</button>
+          </div>
+
+          <div class="analytics-switchbar">
+            <div class="inventory-tabs analytics-tabs">
+              <button class="active" data-analytics-type="box">🎁 盲盒活动</button>
+              <button data-analytics-type="rank">🏆 排行榜活动</button>
+            </div>
+            <label>选择活动
+              <select id="analyticsActivitySelect">
+                <option data-kind="box">DataDID 盲盒狂欢季 · 已结束（04-14 ~ 05-13）</option>
+                <option data-kind="rank">POC Ranking #R1 · 已结算（05-26 ~ 06-25）</option>
+                <option data-kind="box">DataDID Plugin Review Campaign（06-24 ~ 07-23）</option>
+                <option data-kind="rank">POC Ranking #R2 积分排行榜</option>
+                <option data-kind="box">AliveCheck 安心守护季（02-06 ~ 03-06）</option>
+                <option data-kind="box">MEMO DataDID 圣诞狂欢季（2025-12-23 ~ 01-23）</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="analytics-pane active" id="analyticsBoxPane">
+            <div class="analytics-metrics">
+              <article><span>总抽奖次数</span><strong>5,520,954</strong><small>日均 18.4 万次</small></article>
+              <article><span>USDT 已抽取 / 总量</span><strong class="amber">25 / 68</strong><small>中奖 22 人 · 剩余 43 个名额</small></article>
+              <article><span>参与用户数</span><strong>96,412</strong><small>其中新注册 31,208</small></article>
+              <article><span>待发放（哈希未上传）</span><strong class="amber">3</strong><small>核验通过待打款，上传哈希即完成发放</small></article>
+            </div>
+
+            <section class="panel analytics-panel">
+              <div class="panel-head">
+                <div><h2>奖品抽奖统计</h2><p>有限奖品剩余为 0 时自动摘除；「奖池追加」数量已合并显示。</p></div>
+              </div>
+              <div class="analytics-table prize-stat-table">
+                <div class="analytics-head"><span>奖品名称</span><span>类型</span><span>奖品总数量</span><span>已抽取次数</span><span>剩余数量</span><span>消耗进度</span></div>
+                <div><b>10 Points</b><span class="type-badge points">积分</span><span>无限</span><strong>3,616,227</strong><span>无限</span><i class="progress green" style="--w: 100%"></i></div>
+                <div><b>50 Points</b><span class="type-badge points">积分</span><span>无限</span><strong>1,758,386</strong><span>无限</span><i class="progress green" style="--w: 100%"></i></div>
+                <div><b>100 Points</b><span class="type-badge points">积分</span><span>无限</span><strong>11,808</strong><span>无限</span><i class="progress green" style="--w: 100%"></i></div>
+                <div><b>Avatar Pendant</b><span class="type-badge pendant">挂件</span><span>9,831</span><strong>9,831</strong><span>0</span><i class="progress purple" style="--w: 100%"></i></div>
+                <div><b>20 USDT</b><span class="type-badge usdt">USDT</span><span>55</span><strong>13</strong><span>42</span><i class="progress amber" style="--w: 24%"></i></div>
+                <div><b>100 USDT</b><span class="type-badge usdt">USDT</span><span>6</span><strong>6</strong><span>0</span><i class="progress amber" style="--w: 100%"></i></div>
+                <div><b>200 USDT</b><span class="type-badge usdt">USDT</span><span>5</span><strong>5</strong><span>0</span><i class="progress amber" style="--w: 100%"></i></div>
+                <div><b>300 USDT</b><span class="type-badge usdt">USDT</span><span>2</span><strong>1</strong><span>1</span><i class="progress amber" style="--w: 50%"></i></div>
+                <div><b>labubu blind box</b><span class="type-badge gift">实物</span><span>11</span><strong>1</strong><span>10</span><i class="progress blue" style="--w: 9%"></i></div>
+                <div><b>NFT</b><span class="type-badge nft">NFT</span><span>13</span><strong>3</strong><span>10</span><i class="progress purple" style="--w: 23%"></i></div>
+              </div>
+            </section>
+
+            <section class="panel analytics-panel">
+              <div class="panel-head">
+                <div><h2>USDT 中奖名单</h2><p>状态仅两种：待发放 · 哈希未上传 / 已发放；上传哈希即完成发放，导出用于财务打款与推特公示。</p></div>
+                <button class="ghost">导出 CSV</button>
+              </div>
+              <div class="analytics-table winner-table">
+                <div class="analytics-head"><span>用户名</span><span>奖品</span><span>钱包地址</span><span>DID</span><span>中奖时间</span><span>活动来源</span><span>状态</span><span>操作</span></div>
+                <div><b>lcc3456</b><strong>20 USDT</strong><span>2007...4416</span><code>did:memo:f88a...</code><span>05-12 18:20</span><span>memo official</span><em class="done">已发放</em><button class="ghost mini">查看哈希</button></div>
+                <div><b>流星雨</b><strong>20 USDT</strong><span>1991...8144</span><code>did:memo:3f11...</code><span>05-08 20:01</span><span>memo official</span><em class="done">已发放</em><button class="ghost mini">查看哈希</button></div>
+                <div><b>BaoLong201111</b><strong>200 USDT</strong><span>2038...5712</span><code>did:memo:8c08...</code><span>05-08 12:07</span><span>memo official</span><em class="pending">待发放 · 哈希未上传</em><button class="ghost mini hash-open" data-user="BaoLong201111" data-prize="200 USDT">上传哈希</button></div>
+                <div><b>琪琪</b><strong>100 USDT</strong><span>1976...0048</span><code>did:memo:55ae...</code><span>05-06 18:37</span><span>memo official</span><em class="pending">待发放 · 哈希未上传</em><button class="ghost mini hash-open" data-user="琪琪" data-prize="100 USDT">上传哈希</button></div>
+                <div><b>NGUYEN QUOC HAI</b><strong>20 USDT</strong><span>1982...2400</span><code>did:memo:eac9...</code><span>05-04 15:37</span><span>memo official</span><em class="pending">待发放 · 哈希未上传</em><button class="ghost mini hash-open" data-user="NGUYEN QUOC HAI" data-prize="20 USDT">上传哈希</button></div>
+                <div><b>King</b><strong>100 USDT</strong><span>1989...8976</span><code>did:memo:3cd8...</code><span>04-30 19:00</span><span>memo official</span><em class="done">已发放</em><button class="ghost mini">查看哈希</button></div>
+              </div>
+            </section>
+          </div>
+
+          <div class="analytics-pane" id="analyticsRankPane">
+            <div class="analytics-metrics">
+              <article><span>上榜用户数</span><strong>12,408</strong><small>活动期间获得积分的用户</small></article>
+              <article><span>榜单状态</span><strong>已结算</strong><small>快照冻结于 06-25 23:59 UTC · 每日更新</small></article>
+              <article><span>Top 100 门槛核验</span><strong class="green-text">97 / 100</strong><small>降格 1 人 · 取消资格 2 人</small></article>
+              <article><span>USDT 认领进度</span><strong class="amber">2 / 3</strong><small>待认领 1 人 · 认领期限 7 天</small></article>
+            </div>
+
+            <section class="panel analytics-panel">
+              <div class="panel-head">
+                <div><h2>名次奖励发放概览</h2><p>按名次段汇总门槛核验与发放进度；积分按到账规则结算后自动发放，USDT 需用户认领后人工发放。</p></div>
+              </div>
+              <div class="analytics-table rank-reward-table">
+                <div class="analytics-head"><span>名次段</span><span>奖励</span><span>应发人数</span><span>门槛核验</span><span>发放状态</span><span>备注</span></div>
+                <div><b>第 1 名</b><strong>500 USDT</strong><span>1</span><em class="status-pill live">达标 1/1</em><span class="pending">待认领 1</span><span>用户私信提交钱包地址后发放</span></div>
+                <div><b>第 2 名</b><strong>200 USDT</strong><span>1</span><em class="status-pill warn">不达标 1（邀请 89 &lt; 100）</em><span>降格处理</span><span>降格至积分段位，按 2000 积分发放</span></div>
+                <div><b>第 3 名</b><strong>100 USDT</strong><span>1</span><em class="status-pill live">达标 1/1</em><span class="done">已发放</span><span>哈希已公示</span></div>
+                <div><b>第 4-10 名</b><strong class="green-text">2,000 积分</strong><span>7 +1</span><em class="status-pill live">达标 8/8</em><span class="done">已自动到账</span><span>含第 2 名降格 1 人</span></div>
+                <div><b>第 11-100 名</b><strong class="green-text">500 积分</strong><span>90</span><em class="status-pill warn">取消资格 2（邀请 &lt; 10）</em><span class="done">已自动到账 88</span><span>2 人不满足 Top 100 门槛，不予发放</span></div>
+              </div>
+            </section>
+
+            <section class="panel analytics-panel">
+              <div class="panel-head">
+                <div><h2>榜单快照（结算依据）</h2><p>活动结束时冻结的最终榜单；门槛核验结果与奖励逐行标注，作为发放与公示依据。</p></div>
+                <button class="ghost">导出快照</button>
+              </div>
+              <div class="analytics-table rank-snapshot-table">
+                <div class="analytics-head"><span>排名</span><span>用户名</span><span>DID</span><span>活动积分</span><span>邀请数（核验）</span><span>门槛结果</span><span>应得奖励</span><span>状态</span></div>
+                <div><b>1</b><strong>Olivia</strong><code>did:memo:9a2f...</code><span>25,400</span><span>126</span><em class="status-pill live">达标</em><strong>500 USDT</strong><span class="pending">待认领</span></div>
+                <div><b>2</b><strong>Cathy</strong><code>did:memo:1c8b...</code><span>24,400</span><span>89 ⚠</span><em class="status-pill warn">不达标 · 降格</em><strong class="green-text">2,000 积分</strong><span class="done">已到账</span></div>
+                <div><b>3</b><strong>Lonika</strong><code>did:memo:7e41...</code><span>22,400</span><span>143</span><em class="status-pill live">达标</em><strong>100 USDT</strong><span class="done">已发放</span></div>
+                <div><b>4</b><strong>CryptoKing</strong><code>did:memo:e3d0...</code><span>19,900</span><span>37</span><em class="status-pill live">达标</em><strong class="green-text">2,000 积分</strong><span class="done">已到账</span></div>
+                <div><b>5</b><strong>momo_web3</strong><code>did:memo:44aa...</code><span>19,600</span><span>21</span><em class="status-pill live">达标</em><strong class="green-text">2,000 积分</strong><span class="done">已到账</span></div>
+                <div><b>14</b><strong>zk_hunter</strong><code>did:memo:b0c2...</code><span>16,300</span><span>6 ⚠</span><em class="status-pill danger">不达标 · 取消资格</em><strong>-</strong><span class="failed">不予发放</span></div>
+              </div>
+              <p class="inventory-rule">核验口径：邀请数 = 活动期间绑定该用户邀请码的新用户数；Top 3 需 ≥100，Top 100 需 ≥10。榜单快照与门槛结果同步推特公示。</p>
+            </section>
+          </div>
+        </div>
+      </section>
+
+      <section class="page" id="logs">
+        <section class="panel">
+          <div class="panel-head"><div><h2>操作日志</h2><p>记录发布、奖池追加、延期、发放、作废回收等敏感操作。</p></div></div>
+          <table>
+            <thead><tr><th>UTC 时间</th><th>操作人</th><th>对象</th><th>类型</th><th>变更</th></tr></thead>
+            <tbody>
+              <tr><td>2026-07-17 02:18</td><td>Olivia</td><td>活动</td><td>发布</td><td>草稿 → 待审核</td></tr>
+              <tr><td>2026-07-17 01:32</td><td>Jay</td><td>奖池</td><td>追加</td><td>300U + 10</td></tr>
+              <tr><td>2026-07-16 22:04</td><td>Mia</td><td>中奖记录</td><td>作废回收</td><td>逾期未认领</td></tr>
+            </tbody>
+          </table>
+        </section>
+      </section>
+
+      <section class="page" id="notice">
+        <section class="notice-shell">
+          <section class="panel notice-panel notice-card">
+            <span class="notice-status">草稿</span>
+            <div class="notice-title">
+              <h2>新建公告</h2>
+              <p>保存草稿不排期；点击「发布」后按推送方式排期，到点自动推送。</p>
+            </div>
+            <div class="form-grid notice-form">
+              <label>公告标题 <em>*</em><input value="Summer DID Rush 即将开始" /></label>
+              <label>关联活动（选填）
+                <select>
+                  <option>无 · 平台公告</option>
+                  <option>DataDID 盲盒狂欢季 S2</option>
+                  <option>POC Ranking #R1 积分排行榜</option>
+                  <option>Plugin Review Campaign</option>
+                </select>
+              </label>
+              <label>推送渠道 <em>*</em><span>（点击勾选）</span>
+                <div class="chip-row notice-channel-row">
+                  <button class="chip active" type="button">Web</button>
+                  <button class="chip active" type="button">H5</button>
+                  <button class="chip active" type="button">TG 小程序</button>
+                  <button class="chip active" type="button">Pi 浏览器</button>
+                </div>
+              </label>
+              <label>推送方式
+                <div class="notice-push-grid">
+                  <select>
+                    <option>定时推送</option>
+                    <option>立即推送</option>
+                    <option>随活动开始</option>
+                  </select>
+                  <input type="datetime-local" value="2026-07-20T00:00" />
+                </div>
+              </label>
+              <label class="full">公告内容 <em>*</em><textarea>完成 DID 创建并邀请好友，活动期间可获得活动盲盒抽奖次数。</textarea></label>
+            </div>
+            <div class="notice-actions">
+              <button class="ghost">保存草稿</button>
+              <button class="primary">发布</button>
+            </div>
+          </section>
+
+          <section class="panel notice-list-panel">
+            <div class="manage-filters">
+              <input placeholder="搜索公告标题..." />
+              <div class="segmented compact">
+                <button class="active">全部</button>
+                <button>草稿</button>
+                <button>已排期</button>
+                <button>已推送</button>
+              </div>
+            </div>
+            <div class="notice-table">
+              <div class="notice-table-head">
+                <span>公告标题</span><span>渠道</span><span>推送方式 / 时间（UTC）</span><span>关联活动</span><span>状态</span><span>操作</span>
+              </div>
+              <div>
+                <b>Summer DID Rush 即将开始<small>完成 DID 创建并邀请好友，活动期间可获得活动盲盒抽奖次数...</small></b>
+                <span>Web / H5 / TG / Pi</span>
+                <strong>定时 · 07-20 00:00</strong>
+                <span>盲盒狂欢季 S2</span>
+                <em class="status-pill scheduled">已排期</em>
+                <div class="row-actions"><button class="ghost mini">编辑</button><button class="ghost mini danger-action">取消排期</button></div>
+              </div>
+              <div>
+                <b>插件评论活动获奖名单预告<small>评选结果将于活动结束后 3 个工作日内公布...</small></b>
+                <span>Web / H5</span>
+                <strong>- 未排期</strong>
+                <span>Plugin Review Campaign</span>
+                <em class="status-pill draft">草稿</em>
+                <div class="row-actions"><button class="ghost mini">编辑</button><button class="ghost mini danger-action">删除</button></div>
+              </div>
+              <div>
+                <b>DataDID 盲盒狂欢季正式开启<small>注册 / 拉新即可抽取 USDT 与海量积分盲盒...</small></b>
+                <span>Web / H5 / TG / Pi</span>
+                <strong>随活动开始 · 04-14 00:00</strong>
+                <span>盲盒狂欢季</span>
+                <em class="status-pill sent">已推送</em>
+                <div class="row-actions"><button class="ghost mini">查看</button><button class="ghost mini">复制为新公告</button></div>
+              </div>
+              <div>
+                <b>AliveCheck 安心守护季上线<small>订阅 AliveCheck 抽盲盒，1000 USDT 奖池...</small></b>
+                <span>Web / H5 / TG / Pi</span>
+                <strong>随活动开始 · 02-06 00:00</strong>
+                <span>AliveCheck 安心守护季</span>
+                <em class="status-pill sent">已推送</em>
+                <div class="row-actions"><button class="ghost mini">查看</button><button class="ghost mini">复制为新公告</button></div>
+              </div>
+              <div>
+                <b>圣诞狂欢季延期通知<small>活动延长至 1 月 23 日，500 USDT 超级奖池重启...</small></b>
+                <span>Web / H5 / TG / Pi</span>
+                <strong>立即 · 01-13 09:05</strong>
+                <span>圣诞狂欢季</span>
+                <em class="status-pill sent">已推送</em>
+                <div class="row-actions"><button class="ghost mini">查看</button><button class="ghost mini">复制为新公告</button></div>
+              </div>
+            </div>
+            <p class="notice-footnote">状态流：草稿 → 已排期（推送时间前可编辑 / 取消排期）→ 已推送（只读，可复制为新公告）。编辑与取消排期均写入操作日志；推送后消息中心即时可见。</p>
+          </section>
+        </section>
+      </section>
+    </main>
+
+    <div class="modal-backdrop hidden" id="hashModal">
+      <div class="hash-modal">
+        <h2>上传奖励哈希 · <span id="hashUser">BaoLong201111</span></h2>
+        <p>填写链上转账交易哈希；提交后该记录状态更新为「已发放」，哈希对外公示可查。</p>
+        <div class="hash-summary">
+          <span>奖品 / 状态</span>
+          <strong id="hashPrize">200 USDT</strong>
+          <em>待发放</em>
+        </div>
+        <label>交易哈希（Tx Hash）<input id="hashInput" value="" placeholder="0x..." /></label>
+        <p class="hash-help">校验：哈希格式（0x + 64 位十六进制）；提交写入操作日志，并同步推特公示队列。</p>
+        <div class="modal-actions">
+          <button class="ghost" id="hashCancel">取消</button>
+          <button class="primary" id="hashSubmit">提交并标记已发放</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-backdrop hidden" id="regularRuleModal">
+      <div class="hash-modal regular-rule-modal">
+        <h2>新建常规盲盒规则</h2>
+        <p>规则启用后实时同步为用户端 Reward Center 条目；奖池库存与权重在「奖品库存」页维护。</p>
+        <div class="form-grid">
+          <label>展示分组 <em>*</em>
+            <select>
+              <option>成就解锁类（Achievement Unlock）</option>
+              <option>积分兑换类（Redeem with Points）</option>
+            </select>
+          </label>
+          <label>排序（用户端展示顺序）<input value="7" /></label>
+          <label>用户端条目名称（英文） <em>*</em><input placeholder="如 Weekly Quiz" /></label>
+          <label>条目名称（中文）<input placeholder="如 每周答题" /></label>
+          <label>触发行为 <em>*</em>
+            <select>
+              <option>自定义事件（需开发接入）</option>
+              <option>连续签到</option>
+              <option>邀请好友</option>
+              <option>创建 DID</option>
+              <option>积分兑换</option>
+            </select>
+          </label>
+          <label>触发参数（阈值）<input placeholder="事件标识（event key）" /></label>
+          <label class="full">校验方式（随触发行为自动带出）<input value="校验：按事件上报口径校验（需开发确认）" /></label>
+          <label>获得盒数<input value="1" /></label>
+          <label>单用户上限
+            <div class="regular-limit-grid">
+              <input value="1" />
+              <select><option>每日</option><option>每 7 天</option><option>仅一次</option><option>不封顶</option></select>
+            </div>
+          </label>
+          <label>绑定权重组 <em>*</em>
+            <select>
+              <option>A · 免费盲盒</option>
+              <option>B · 200 积分兑换（回报率≥100%）</option>
+            </select>
+          </label>
+          <label>条目图标
+            <button class="upload-box" type="button">上传盲盒图标（3x PNG）</button>
+          </label>
+        </div>
+        <div class="modal-actions">
+          <button class="ghost" id="regularRuleCancel">取消</button>
+          <button class="ghost">保存草稿</button>
+          <button class="primary" id="regularRuleSubmit">保存并启用</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-backdrop hidden" id="inventoryModal">
+      <div class="hash-modal inventory-modal">
+        <h2>奖池追加 · <span id="inventoryPrize">20 USDT</span>（<span id="inventoryType">USDT</span>）</h2>
+        <p>进行中奖池仅允许追加，不允许调减；提交后写入操作日志，由运营人员负责该操作。</p>
+        <div class="hash-summary inventory-summary">
+          <span>当前：初始 + 追加 = 总数量</span>
+          <strong id="inventoryCurrent">55</strong>
+        </div>
+        <div class="hash-summary inventory-summary">
+          <span>已抽取 / 剩余</span>
+          <strong id="inventoryDrawn">13 / 42</strong>
+        </div>
+        <label>追加数量<input id="inventoryAddCount" value="10" /></label>
+        <div class="hash-summary inventory-summary">
+          <span>追加后总数量</span>
+          <strong id="inventoryAfter">55 → 65</strong>
+        </div>
+        <label>追加原因（写入操作日志）<input value="活动热度超预期，追加奖池维持中奖体验" /></label>
+        <p class="hash-help">校验：追加数量须为正整数；追加后预算实时联动，超出预算将在待办中提示。</p>
+        <div class="modal-actions">
+          <button class="ghost" id="inventoryCancel">取消</button>
+          <button class="primary" id="inventorySubmit">提交追加</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
