@@ -96,13 +96,13 @@
               <button class="primary" id="regularRuleOpen">+ 新增规则</button>
             </div>
             <div class="regular-rule-table achievement">
-              <div class="regular-rule-head"><span>排序</span><span>用户端条目</span><span>触发行为 / 校验方式</span><span>获得盒数</span><span>单用户上限</span><span>绑定权重组</span><span>状态</span><span>操作</span></div>
-              <div><input value="1" /><b>Online Rewards<small>在线奖励</small></b><span>达到累计在线时长 · 自动校验</span><input value="1" /><input value="每日 1 次" /><select><option>A · 免费盲盒</option></select><span class="switch on"></span><button class="ghost mini">编辑</button></div>
-              <div><input value="2" /><b>Continuous Check-In<small>连续签到</small></b><span>连续签到 7 天达标 · 自动校验</span><input value="1" /><input value="每 7 天 1 次" /><select><option>A · 免费盲盒</option></select><span class="switch on"></span><button class="ghost mini">编辑</button></div>
-              <div><input value="3" /><b>Invite Friends<small>邀请好友</small></b><span>新用户绑定邀请人的邀请码</span><input value="1" /><input value="不封顶" /><select><option>A · 免费盲盒</option></select><span class="switch on"></span><button class="ghost mini">编辑</button></div>
-              <div><input value="4" /><b>Link Social Account<small>绑定社交账号</small></b><span>完成社交账号绑定 · 自动校验</span><input value="1" /><input value="每账号 1 次" /><select><option>A · 免费盲盒</option></select><span class="switch on"></span><button class="ghost mini">编辑</button></div>
-              <div><input value="5" /><b>Create DID<small>创建 DID</small></b><span>用户成功创建 DID · 自动校验</span><input value="1" /><input value="1 次" /><select><option>A · 免费盲盒</option></select><span class="switch on"></span><button class="ghost mini">编辑</button></div>
-              <div><input value="6" /><b>Points To 10K<small>积分达到 1 万</small></b><span>累计积分达到阈值 · 自动校验</span><input value="1" /><input value="1 次" /><select><option>A · 免费盲盒</option></select><span class="switch on"></span><button class="ghost mini">编辑</button></div>
+              <div class="regular-rule-head"><span>排序</span><span>用户端条目</span><span>触发行为 / 校验方式</span><span>获得盒数</span><span>单用户上限</span><span>绑定权重组</span><span>状态</span><span>排序调整</span></div>
+              <div><input value="1" /><b>Online Rewards<small>在线奖励</small></b><span>达到累计在线时长 · 自动校验</span><input value="1" /><select class="limit-select"><option selected>1</option><option>不封顶</option></select><select><option>A · 免费盲盒</option></select><button class="switch on regular-visibility" type="button" aria-label="当前用户端可见，点击下架" title="开启：用户端可见，规则生效；关闭：用户端隐藏，规则失效"></button><div class="sort-actions"><button class="ghost mini rule-move-up" type="button">↑</button><button class="ghost mini rule-move-down" type="button">↓</button></div></div>
+              <div><input value="2" /><b>Continuous Check-In<small>连续签到</small></b><span>连续签到 7 天达标 · 自动校验</span><input value="1" /><select class="limit-select"><option selected>1</option><option>不封顶</option></select><select><option>A · 免费盲盒</option></select><button class="switch on regular-visibility" type="button" aria-label="当前用户端可见，点击下架" title="开启：用户端可见，规则生效；关闭：用户端隐藏，规则失效"></button><div class="sort-actions"><button class="ghost mini rule-move-up" type="button">↑</button><button class="ghost mini rule-move-down" type="button">↓</button></div></div>
+              <div><input value="3" /><b>Invite Friends<small>邀请好友</small></b><span>新用户绑定邀请人的邀请码</span><input value="1" /><select class="limit-select"><option>1</option><option selected>不封顶</option></select><select><option>A · 免费盲盒</option></select><button class="switch on regular-visibility" type="button" aria-label="当前用户端可见，点击下架" title="开启：用户端可见，规则生效；关闭：用户端隐藏，规则失效"></button><div class="sort-actions"><button class="ghost mini rule-move-up" type="button">↑</button><button class="ghost mini rule-move-down" type="button">↓</button></div></div>
+              <div><input value="4" /><b>Link Social Account<small>绑定社交账号</small></b><span>完成社交账号绑定 · 自动校验</span><input value="1" /><select class="limit-select"><option>1</option><option selected>不封顶</option></select><select><option>A · 免费盲盒</option></select><button class="switch on regular-visibility" type="button" aria-label="当前用户端可见，点击下架" title="开启：用户端可见，规则生效；关闭：用户端隐藏，规则失效"></button><div class="sort-actions"><button class="ghost mini rule-move-up" type="button">↑</button><button class="ghost mini rule-move-down" type="button">↓</button></div></div>
+              <div><input value="5" /><b>Create DID<small>创建 DID</small></b><span>用户成功创建 DID · 自动校验</span><input value="1" /><select class="limit-select"><option selected>1</option><option>不封顶</option></select><select><option>A · 免费盲盒</option></select><button class="switch on regular-visibility" type="button" aria-label="当前用户端可见，点击下架" title="开启：用户端可见，规则生效；关闭：用户端隐藏，规则失效"></button><div class="sort-actions"><button class="ghost mini rule-move-up" type="button">↑</button><button class="ghost mini rule-move-down" type="button">↓</button></div></div>
+              <div><input value="6" /><b>Points To 10K<small>积分达到 1 万</small></b><span>累计积分达到阈值 · 自动校验</span><input value="1" /><select class="limit-select"><option selected>1</option><option>不封顶</option></select><select><option>A · 免费盲盒</option></select><button class="switch on regular-visibility" type="button" aria-label="当前用户端可见，点击下架" title="开启：用户端可见，规则生效；关闭：用户端隐藏，规则失效"></button><div class="sort-actions"><button class="ghost mini rule-move-up" type="button">↑</button><button class="ghost mini rule-move-down" type="button">↓</button></div></div>
             </div>
           </section>
 
@@ -115,7 +115,7 @@
             </div>
             <div class="regular-rule-table redeem">
               <div class="regular-rule-head"><span>排序</span><span>用户端条目</span><span>消耗 / 校验方式</span><span>获得盒数</span><span>单用户上限</span><span>绑定权重组</span><span>状态</span><span>操作</span></div>
-              <div><input value="1" /><b>Consume 200 Points<small>消耗 200 积分兑换</small></b><span>扣减 200 积分成功后发放</span><input value="1" /><input value="每日 5 次" /><select><option>B · 200 积分兑换（回报率≥100%）</option></select><span class="switch on"></span><button class="ghost mini">编辑</button></div>
+              <div><input value="1" readonly /><b>Consume Points<small>消耗积分兑换</small></b><span>扣减 <select class="cost-select"><option>100</option><option selected>200</option><option>500</option></select> 积分成功后发放</span><input value="1" readonly /><select class="limit-select" disabled><option selected>1</option><option>不封顶</option></select><select disabled><option>B · 200 积分兑换（回报率≥100%）</option></select><button class="switch on regular-visibility" type="button" aria-label="当前用户端可见，点击下架" title="开启：用户端可见，规则生效；关闭：用户端隐藏，规则失效"></button><span class="no-action">-</span></div>
             </div>
             <p class="regular-check">校验：兑换类规则绑定的权重组回报率低于 100% 时阻断启用；权重组高档库存耗尽导致回报率跌破 100% 时自动暂停兑换入口并生成待办。</p>
           </section>
@@ -269,15 +269,15 @@
               <p class="panel-hint">进行中奖池仅允许追加，不允许调减；追加操作写入日志。</p>
             </div>
             <div class="analytics-table inventory-table regular-inventory">
-              <div class="analytics-head"><span>奖品档位</span><span>类型</span><span>数量类型</span><span>初始数量</span><span>累计追加</span><span>总数量</span><span>已抽取</span><span>剩余</span><span>消耗进度</span><span>预警阈值</span><span>状态</span><span>操作</span></div>
-              <div><b>10 Points</b><span class="type-badge points">积分</span><span class="type-badge points">无限 · 保底</span><span>-</span><span>-</span><span>无限</span><strong>3,616,227</strong><span>无限</span><i class="progress green" style="--w:100%"></i><span>-</span><em class="inv-ok">启用</em><button class="ghost mini" disabled>保底档</button></div>
-              <div><b>50 Points</b><span class="type-badge points">积分</span><span class="type-badge points">无限 · 保底</span><span>-</span><span>-</span><span>无限</span><strong>1,758,386</strong><span>无限</span><i class="progress green" style="--w:100%"></i><span>-</span><em class="inv-ok">启用</em><button class="ghost mini" disabled>保底档</button></div>
-              <div><b>100 Points</b><span class="type-badge points">积分</span><span class="type-badge points">无限 · 保底</span><span>-</span><span>-</span><span>无限</span><strong>11,808</strong><span>无限</span><i class="progress green" style="--w:100%"></i><span>-</span><em class="inv-ok">启用</em><button class="ghost mini" disabled>保底档</button></div>
-              <div><b>500 Points</b><span class="type-badge points">积分</span><span class="type-badge pendant">有限</span><span>211</span><span>0</span><span>211</span><strong>211</strong><span>0</span><i class="progress purple" style="--w:100%"></i><input value="21" /><em class="inv-off">已摘除</em><button class="ghost mini inventory-add" data-prize="500 Points" data-type="积分" data-current="211" data-drawn="211" data-left="0">追加</button></div>
-              <div><b>1000 Points</b><span class="type-badge points">积分</span><span class="type-badge pendant">有限</span><span>25</span><span>0</span><span>25</span><strong>25</strong><span>0</span><i class="progress purple" style="--w:100%"></i><input value="3" /><em class="inv-off">已摘除</em><button class="ghost mini inventory-add" data-prize="1000 Points" data-type="积分" data-current="25" data-drawn="25" data-left="0">追加</button></div>
-              <div><b>Avatar Pendant</b><span class="type-badge pendant">挂件</span><span class="type-badge pendant">有限</span><span>9,831</span><span>0</span><span>9,831</span><strong>9,831</strong><span>0</span><i class="progress purple" style="--w:100%"></i><input value="980" /><em class="inv-off">已摘除</em><button class="ghost mini inventory-add" data-prize="Avatar Pendant" data-type="挂件" data-current="9,831" data-drawn="9,831" data-left="0">追加</button></div>
+              <div class="analytics-head"><span>奖品档位</span><span>类型</span><span>总数量</span><span>已抽取</span><span>剩余</span><span>预警阈值</span><span>免费盲盒中权重<br /><small>权重组 A</small></span><span>状态<br /><small>开=启用 / 关=下架</small></span><span>操作</span></div>
+              <div><b>10 Points</b><span class="type-badge points">积分</span><span>无限</span><strong>3,616,227</strong><span>无限</span><span>-</span><label class="weight-input"><input value="60" />%</label><span class="switch on"></span><button class="ghost mini" disabled>保底档</button></div>
+              <div><b>50 Points</b><span class="type-badge points">积分</span><span>无限</span><strong>1,758,386</strong><span>无限</span><span>-</span><label class="weight-input"><input value="25" />%</label><span class="switch on"></span><button class="ghost mini" disabled>保底档</button></div>
+              <div><b>100 Points</b><span class="type-badge points">积分</span><span>无限</span><strong>11,808</strong><span>无限</span><span>-</span><label class="weight-input"><input value="10" />%</label><span class="switch on"></span><button class="ghost mini" disabled>保底档</button></div>
+              <div><b>500 Points</b><span class="type-badge points">积分</span><span>211</span><strong>211</strong><span>0</span><input value="21" /><label class="weight-input"><input value="4" />%</label><span class="switch on"></span><button class="ghost mini inventory-add" data-prize="500 Points" data-type="积分" data-current="211" data-drawn="211" data-left="0">追加</button></div>
+              <div><b>1000 Points</b><span class="type-badge points">积分</span><span>25</span><strong>25</strong><span>0</span><input value="3" /><label class="weight-input"><input value="1" />%</label><span class="switch on"></span><button class="ghost mini inventory-add" data-prize="1000 Points" data-type="积分" data-current="25" data-drawn="25" data-left="0">追加</button></div>
+              <div><b>Avatar Pendant</b><span class="type-badge pendant">挂件</span><span>9,831</span><strong>9,831</strong><span>0</span><input value="10" /><label class="weight-input"><input value="2" />%</label><span class="switch on"></span><button class="ghost mini inventory-add" data-prize="Avatar Pendant" data-type="挂件" data-current="9,831" data-drawn="9,831" data-left="0">追加</button></div>
             </div>
-            <p class="inventory-rule">校验规则：数量不得小于已抽取次数；有限档剩余为 0 自动摘除并由保底档兜底；库存回补仅通过中奖记录作废回收路径。</p>
+            <p class="inventory-rule">校验规则：数量不得小于已抽取次数；每个奖池至少保留一个启用中的无限保底档；有限档剩余为 0 自动摘除并由保底档兜底；库存回补仅通过「中奖记录作废回收」路径（剩余 +1）。预警阈值为档位级配置，修改即时生效并联动工作台待办。</p>
           </section>
 
           <section class="panel inventory-panel" id="inventoryEvent">
@@ -290,38 +290,36 @@
             </div>
             <div class="analytics-table inventory-table event-inventory">
               <div class="analytics-head"><span>奖品档位</span><span>类型</span><span>数量类型</span><span>初始数量</span><span>累计追加</span><span>总数量</span><span>已抽取</span><span>剩余</span><span>消耗进度</span><span>预警阈值</span><span>状态</span><span>操作</span></div>
-              <div><b>20 USDT</b><span class="type-badge usdt">USDT</span><span class="type-badge pendant">有限</span><span>50</span><span class="green-text">+5</span><span>55</span><strong>13</strong><span>42</span><i class="progress amber" style="--w:24%"></i><input value="6" /><em class="inv-ok">启用</em><button class="ghost mini inventory-add" data-prize="20 USDT" data-type="USDT" data-current="55" data-drawn="13" data-left="42">追加</button></div>
-              <div><b>100 USDT</b><span class="type-badge usdt">USDT</span><span class="type-badge pendant">有限</span><span>6</span><span>0</span><span>6</span><strong>6</strong><span>0</span><i class="progress amber" style="--w:100%"></i><input value="1" /><em class="inv-off">已摘除</em><button class="ghost mini inventory-add" data-prize="100 USDT" data-type="USDT" data-current="6" data-drawn="6" data-left="0">追加</button></div>
-              <div><b>200 USDT</b><span class="type-badge usdt">USDT</span><span class="type-badge pendant">有限</span><span>5</span><span>0</span><span>5</span><strong>5</strong><span>0</span><i class="progress amber" style="--w:100%"></i><input value="1" /><em class="inv-off">已摘除</em><button class="ghost mini inventory-add" data-prize="200 USDT" data-type="USDT" data-current="5" data-drawn="5" data-left="0">追加</button></div>
-              <div><b>300 USDT</b><span class="type-badge usdt">USDT</span><span class="type-badge pendant">有限</span><span>2</span><span>0</span><span>2</span><strong>1</strong><span>1 ⚠</span><i class="progress amber" style="--w:50%"></i><input value="1" /><em class="inv-warn">库存预警</em><button class="ghost mini inventory-add" data-prize="300 USDT" data-type="USDT" data-current="2" data-drawn="1" data-left="1">追加</button></div>
-              <div><b>labubu blind box</b><span class="type-badge gift">实物</span><span class="type-badge pendant">有限</span><span>11</span><span>0</span><span>11</span><strong>1</strong><span>10</span><i class="progress blue" style="--w:9%"></i><input value="2" /><em class="inv-ok">启用</em><button class="ghost mini inventory-add" data-prize="labubu blind box" data-type="实物" data-current="11" data-drawn="1" data-left="10">追加</button></div>
-              <div><b>NFT</b><span class="type-badge nft">NFT</span><span class="type-badge pendant">有限</span><span>13</span><span>0</span><span>13</span><strong>3</strong><span>10</span><i class="progress purple" style="--w:23%"></i><input value="2" /><em class="inv-ok">启用</em><button class="ghost mini inventory-add" data-prize="NFT" data-type="NFT" data-current="13" data-drawn="3" data-left="10">追加</button></div>
-              <div><b>10 Points</b><span class="type-badge points">积分</span><span class="type-badge points">无限 · 保底</span><span>-</span><span>-</span><span>无限</span><strong>1,842,110</strong><span>无限</span><i class="progress green" style="--w:100%"></i><span>-</span><em class="inv-ok">启用</em><button class="ghost mini" disabled>保底档</button></div>
+              <div><b>20 USDT</b><span class="type-badge usdt">USDT</span><span class="type-badge pendant">有限</span><span>50</span><span class="green-text">+5</span><span>55</span><strong>13</strong><span>42</span><i class="progress amber" style="--w:24%"></i><input value="6" /><span class="switch on inventory-status-toggle" role="button" tabindex="0" aria-label="当前启用，点击下架"></span><button class="ghost mini inventory-add" data-prize="20 USDT" data-type="USDT" data-current="55" data-drawn="13" data-left="42">追加</button></div>
+              <div><b>100 USDT</b><span class="type-badge usdt">USDT</span><span class="type-badge pendant">有限</span><span>6</span><span>0</span><span>6</span><strong>6</strong><span>0</span><i class="progress amber" style="--w:100%"></i><input value="1" /><span class="switch inventory-status-toggle" role="button" tabindex="0" aria-label="当前已摘除，点击启用"></span><button class="ghost mini inventory-add" data-prize="100 USDT" data-type="USDT" data-current="6" data-drawn="6" data-left="0">追加</button></div>
+              <div><b>200 USDT</b><span class="type-badge usdt">USDT</span><span class="type-badge pendant">有限</span><span>5</span><span>0</span><span>5</span><strong>5</strong><span>0</span><i class="progress amber" style="--w:100%"></i><input value="1" /><span class="switch inventory-status-toggle" role="button" tabindex="0" aria-label="当前已摘除，点击启用"></span><button class="ghost mini inventory-add" data-prize="200 USDT" data-type="USDT" data-current="5" data-drawn="5" data-left="0">追加</button></div>
+              <div><b>300 USDT</b><span class="type-badge usdt">USDT</span><span class="type-badge pendant">有限</span><span>2</span><span>0</span><span>2</span><strong>1</strong><span>1 ⚠</span><i class="progress amber" style="--w:50%"></i><input value="1" /><span class="switch on inventory-status-toggle warn" role="button" tabindex="0" aria-label="当前库存预警，点击下架"></span><button class="ghost mini inventory-add" data-prize="300 USDT" data-type="USDT" data-current="2" data-drawn="1" data-left="1">追加</button></div>
+              <div><b>labubu blind box</b><span class="type-badge gift">实物</span><span class="type-badge pendant">有限</span><span>11</span><span>0</span><span>11</span><strong>1</strong><span>10</span><i class="progress blue" style="--w:9%"></i><input value="2" /><span class="switch on inventory-status-toggle" role="button" tabindex="0" aria-label="当前启用，点击下架"></span><button class="ghost mini inventory-add" data-prize="labubu blind box" data-type="实物" data-current="11" data-drawn="1" data-left="10">追加</button></div>
+              <div><b>NFT</b><span class="type-badge nft">NFT</span><span class="type-badge pendant">有限</span><span>13</span><span>0</span><span>13</span><strong>3</strong><span>10</span><i class="progress purple" style="--w:23%"></i><input value="2" /><span class="switch on inventory-status-toggle" role="button" tabindex="0" aria-label="当前启用，点击下架"></span><button class="ghost mini inventory-add" data-prize="NFT" data-type="NFT" data-current="13" data-drawn="3" data-left="10">追加</button></div>
+              <div><b>50 Points</b><span class="type-badge points">积分</span><span class="type-badge pendant">有限</span><span>2000</span><span>0</span><span>2000</span><strong>880</strong><span>1120</span><i class="progress green" style="--w:44%"></i><input value="200" /><span class="switch on inventory-status-toggle" role="button" tabindex="0" aria-label="当前启用，点击下架"></span><button class="ghost mini inventory-add" data-prize="50 Points" data-type="积分" data-current="2000" data-drawn="880" data-left="1120">追加</button></div>
+              <div><b>100 Points</b><span class="type-badge points">积分</span><span class="type-badge pendant">有限</span><span>800</span><span>0</span><span>800</span><strong>158</strong><span>642</span><i class="progress green" style="--w:20%"></i><input value="80" /><span class="switch on inventory-status-toggle" role="button" tabindex="0" aria-label="当前启用，点击下架"></span><button class="ghost mini inventory-add" data-prize="100 Points" data-type="积分" data-current="800" data-drawn="158" data-left="642">追加</button></div>
+              <div><b>200 Points</b><span class="type-badge points">积分</span><span class="type-badge pendant">有限</span><span>300</span><span>0</span><span>300</span><strong>300</strong><span>0</span><i class="progress green" style="--w:100%"></i><input value="30" /><span class="switch inventory-status-toggle" role="button" tabindex="0" aria-label="当前已摘除，点击启用"></span><button class="ghost mini inventory-add" data-prize="200 Points" data-type="积分" data-current="300" data-drawn="300" data-left="0">追加</button></div>
+              <div><b>500 Points</b><span class="type-badge points">积分</span><span class="type-badge pendant">有限</span><span>120</span><span>0</span><span>120</span><strong>2</strong><span>118 ⚠</span><i class="progress green" style="--w:2%"></i><input value="12" /><span class="switch on inventory-status-toggle warn" role="button" tabindex="0" aria-label="当前库存预警，点击下架"></span><button class="ghost mini inventory-add" data-prize="500 Points" data-type="积分" data-current="120" data-drawn="2" data-left="118">追加</button></div>
+              <div><b>1000 Points</b><span class="type-badge points">积分</span><span class="type-badge pendant">有限</span><span>30</span><span>0</span><span>30</span><strong>0</strong><span>30</span><i class="progress green" style="--w:0%"></i><input value="3" /><span class="switch inventory-status-toggle" role="button" tabindex="0" aria-label="当前已摘除，点击启用"></span><button class="ghost mini inventory-add" data-prize="1000 Points" data-type="积分" data-current="30" data-drawn="0" data-left="30">追加</button></div>
+              <div><b>10 Points</b><span class="type-badge points">积分</span><span class="type-badge points">无限 · 保底</span><span>-</span><span>-</span><span>无限</span><strong>1,842,110</strong><span>无限</span><i class="progress green" style="--w:100%"></i><span>-</span><span class="switch on inventory-status-toggle" role="button" tabindex="0" aria-label="当前启用，点击下架"></span><button class="ghost mini" disabled>保底档</button></div>
             </div>
             <p class="inventory-rule">活动进行中仅允许追加，不允许调减；库存低于预警阈值将生成待办，追加提交后写入操作日志。</p>
           </section>
 
           <section class="panel inventory-panel weight-panel active" id="weightPanel">
             <div class="panel-head">
-              <div><h2>抽中权重配置（按盲盒来源分组）</h2><p>同一奖池、共享库存，不同盲盒来源绑定不同权重组；运营只配权重，概率由系统实时计算。</p></div>
-              <button class="ghost">+ 新增权重组</button>
+              <div><h2>积分兑换盲盒 · 权重组 B（消耗 200 积分）</h2><p>兑换盒逻辑独立于免费盒，奖品库存仍与常规盲盒奖池共享；运营只配置权重，回报率由系统实时计算。</p></div>
             </div>
-            <div class="weight-grid">
-              <div class="weight-head"><span>奖品档位</span><span>库存状态</span><span>权重组 A · 免费盲盒<small>绑定：签到 / 邀请 / 任务 / 创建 DID</small></span><span>权重组 B · 200 积分兑换盲盒<small>绑定：消耗 200 积分兑换</small></span></div>
-              <div><b>10 Points</b><span class="type-badge points">无限</span><label><input value="60" />%</label><label><input value="0" />%<small>已排除（最低档不投放）</small></label></div>
-              <div><b>50 Points</b><span class="type-badge points">无限</span><label><input value="25" />%</label><label><input value="25" />%</label></div>
-              <div><b>100 Points</b><span class="type-badge points">无限</span><label><input value="10" />%</label><label><input value="38" />%</label></div>
-              <div><b>200 Points<small>回本档 · 建议新增</small></b><span class="type-badge points">无限</span><label><input value="0" />%<small>免费盒不投放</small></label><label><input value="24" />%<small>面值 = 消耗额，抬升「不亏」频次</small></label></div>
-              <div><b>500 Points</b><span class="type-badge pendant">有限 · 剩 0</span><label><input value="4" />%</label><label><input value="10" />%</label></div>
-              <div><b>1000 Points</b><span class="type-badge pendant">有限 · 剩 0</span><label><input value="1" />%</label><label><input value="3" />%</label></div>
-              <div class="weight-total"><span>权重合计（须为 100%）</span><span></span><strong>100%</strong><strong>100%</strong></div>
-              <div class="weight-total"><span>期望产出（系统计算）</span><span></span><strong>58.5 积分</strong><strong>178.5 积分</strong></div>
-              <div class="weight-total"><span>获取成本 / 回报率</span><span></span><strong>免费 / -</strong><strong>200 积分 / 89%</strong></div>
-              <div class="weight-total"><span>目标回报率（组级可配，不要求保本）</span><span></span><strong>-</strong><label><input value="80" />%<small>低于目标橙色预警</small></label></div>
-              <div class="weight-total"><span>保底最低档位</span><span></span><select><option>10 Points</option></select><select><option>50 Points</option></select></div>
-              <div class="weight-total"><span>保底触发（Pity · 保护高频用户）</span><span></span><strong>-</strong><span>连续 <input value="10" /> 次未中 ≥ <select><option>500 Points</option><option>1000 Points</option></select> → 下次必中</span></div>
+            <div class="weight-grid exchange-weight-grid">
+              <div class="weight-head"><span>奖品档位</span><span>库存状态</span><span>兑换盒权重（B）<small>绑定：消耗 200 积分兑换</small></span></div>
+              <div><b>10 Points</b><span class="type-badge points">无限</span><label><input value="0" />%<small>已排除（最低档不投放）</small></label></div>
+              <div><b>50 Points</b><span class="type-badge points">无限</span><label><input value="25" />%</label></div>
+              <div><b>100 Points</b><span class="type-badge points">无限</span><label><input value="38" />%</label></div>
+              <div><b>200 Points<small>回本档</small></b><span class="type-badge points">无限</span><label><input value="24" />%<small>面值 = 消耗额，抬升「不亏」频次</small></label></div>
+              <div><b>500 Points</b><span class="type-badge pendant">有限 · 剩 0</span><label><input value="10" />%</label></div>
+              <div><b>1000 Points</b><span class="type-badge pendant">有限 · 剩 0</span><label><input value="3" />%</label></div>
+              <div class="weight-total"><span>权重合计（须为 100%）</span><span></span><strong>100%</strong></div>
             </div>
-            <p class="inventory-rule">系统校验与风险提示：每个权重组合计须为 100%；兑换盒不要求保本，运营为消耗类权重组设定目标回报率，实际回报率低于目标时橙色预警并需确认；权重组内有限高档库存耗尽时，剩余权重自动归一化并触发预警。</p>
           </section>
         </div>
       </section>
@@ -480,13 +478,16 @@
                 </div>
               </label>
               <label>推送方式
-                <div class="notice-push-grid">
-                  <select>
+                <div class="notice-push-grid schedule-control">
+                  <select class="schedule-select">
                     <option>定时推送</option>
                     <option>立即推送</option>
                     <option>随活动开始</option>
                   </select>
-                  <input type="datetime-local" value="2026-07-20T00:00" />
+                  <div class="schedule-picker expanded">
+                    <span>选择推送时间（UTC）</span>
+                    <input type="datetime-local" value="2026-07-20T00:00" />
+                  </div>
                 </div>
               </label>
               <label class="full">公告内容 <em>*</em><textarea>完成 DID 创建并邀请好友，活动期间可获得活动盲盒抽奖次数。</textarea></label>
@@ -593,20 +594,29 @@
           <label>触发行为 <em>*</em>
             <select>
               <option>自定义事件（需开发接入）</option>
+              <option>积分达到阈值</option>
               <option>连续签到</option>
               <option>邀请好友</option>
+              <option>绑定社交账号</option>
               <option>创建 DID</option>
               <option>积分兑换</option>
             </select>
           </label>
-          <label>触发参数（阈值）<input placeholder="事件标识（event key）" /></label>
+          <label>积分阈值（points）
+            <select>
+              <option>50K</option>
+              <option>100K</option>
+              <option>200K</option>
+              <option>500K</option>
+              <option>1000K</option>
+              <option>5000K</option>
+            </select>
+          </label>
+          <label class="full">触发参数（非积分阈值规则填写）<input placeholder="事件标识（event key）" /></label>
           <label class="full">校验方式（随触发行为自动带出）<input value="校验：按事件上报口径校验（需开发确认）" /></label>
           <label>获得盒数<input value="1" /></label>
           <label>单用户上限
-            <div class="regular-limit-grid">
-              <input value="1" />
-              <select><option>每日</option><option>每 7 天</option><option>仅一次</option><option>不封顶</option></select>
-            </div>
+            <select class="limit-select"><option selected>1</option><option>不封顶</option></select>
           </label>
           <label>绑定权重组 <em>*</em>
             <select>
@@ -618,10 +628,26 @@
             <button class="upload-box" type="button">上传盲盒图标（3x PNG）</button>
           </label>
         </div>
+        <p class="modal-note">新增规则默认排列在当前成就类规则最末位；保存后可在列表中使用上下移动调整排序。</p>
         <div class="modal-actions">
           <button class="ghost" id="regularRuleCancel">取消</button>
           <button class="ghost">保存草稿</button>
           <button class="primary" id="regularRuleSubmit">保存并启用</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-backdrop hidden" id="regularStatusModal">
+      <div class="hash-modal status-confirm-modal">
+        <h2 id="regularStatusTitle">确认调整规则状态</h2>
+        <p id="regularStatusText">调整后将同步影响用户端 Reward Center 展示，请确认是否继续。</p>
+        <div class="status-impact">
+          <span id="regularStatusFrom">当前：显示 / 生效</span>
+          <strong id="regularStatusTo">调整后：隐藏 / 失效</strong>
+        </div>
+        <div class="modal-actions">
+          <button class="ghost" id="regularStatusCancel">取消</button>
+          <button class="primary" id="regularStatusConfirm">确认调整</button>
         </div>
       </div>
     </div>
