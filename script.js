@@ -1,4 +1,5 @@
 const pageMeta = {
+  replyTweet: ["Reply Tweet 管理", "上传 MEMO 相关推文至 PI 端，用户点赞 / 评价可得积分。生命周期：草稿 → 进行中 → 已过期（到期自动下架，记录保留）"],
   workspace: ["工作台", "统一查看今日盲盒、活动、中奖核验与发放待办。"],
   regular: ["常规盲盒管理", "维护长期有效的任务规则、常规奖池与敏感操作确认。"],
   activityManage: ["活动管理", "盲盒 / 拉新 / 留存活动的创建、配置与生命周期管理。"],
@@ -24,6 +25,92 @@ function navigateToPage(id) {
 
 navItems.forEach((item) => {
   item.addEventListener("click", () => navigateToPage(item.dataset.page));
+});
+
+const replySwitch = document.querySelector(".reply-switch");
+const replyConfirmModal = document.querySelector("#replyConfirmModal");
+const replyConfirmTitle = document.querySelector("#replyConfirmTitle");
+const replyConfirmText = document.querySelector("#replyConfirmText");
+const replyConfirmHint = document.querySelector("#replyConfirmHint");
+const replyConfirmSubmit = document.querySelector("#replyConfirmSubmit");
+const replyConfirmCancel = document.querySelector("#replyConfirmCancel");
+let activeReplyAction = "publish";
+let activeReplyRow = null;
+
+replySwitch?.addEventListener("click", () => {
+  replySwitch.classList.toggle("on");
+});
+
+document.addEventListener("click", (event) => {
+  const filterButton = event.target.closest("[data-reply-filter]");
+  if (filterButton) {
+    const filter = filterButton.dataset.replyFilter;
+    filterButton.closest(".reply-segmented")?.querySelectorAll("button").forEach((button) => {
+      button.classList.toggle("active", button === filterButton);
+    });
+    document.querySelectorAll(".reply-table > div[data-reply-status]").forEach((row) => {
+      row.classList.toggle("hidden", filter !== "all" && row.dataset.replyStatus !== filter);
+    });
+    return;
+  }
+
+  const replyMoveUp = event.target.closest(".reply-move-up");
+  if (replyMoveUp) {
+    const row = replyMoveUp.closest(".reply-table > div[data-reply-status]");
+    const previous = row?.previousElementSibling;
+    if (previous?.matches("[data-reply-status='live']")) {
+      row.parentElement.insertBefore(row, previous);
+    }
+    return;
+  }
+
+  const replyMoveDown = event.target.closest(".reply-move-down");
+  if (replyMoveDown) {
+    const row = replyMoveDown.closest(".reply-table > div[data-reply-status]");
+    const next = row?.nextElementSibling;
+    if (next?.matches("[data-reply-status='live']")) {
+      row.parentElement.insertBefore(next, row);
+    }
+    return;
+  }
+
+  const confirmButton = event.target.closest(".reply-confirm-open");
+  if (!confirmButton) return;
+  activeReplyAction = confirmButton.dataset.confirm || "publish";
+  activeReplyRow = confirmButton.closest(".reply-table > div[data-reply-status]");
+  const isDelete = activeReplyAction === "delete";
+  replyConfirmTitle.textContent = isDelete ? "确认删除" : "确认发布";
+  replyConfirmText.textContent = isDelete ? "确认删除该草稿？" : "确认发布该推文至用户端（PI 端）？";
+  replyConfirmHint.textContent = isDelete ? "草稿将被彻底删除，不可恢复。" : "发布后用户可见并可互动，到期自动下架。";
+  replyConfirmSubmit.textContent = isDelete ? "确认删除" : "确认发布";
+  replyConfirmSubmit.classList.toggle("danger-primary", isDelete);
+  replyConfirmModal?.classList.remove("hidden");
+});
+
+function closeReplyConfirm() {
+  replyConfirmModal?.classList.add("hidden");
+  activeReplyRow = null;
+}
+
+replyConfirmCancel?.addEventListener("click", closeReplyConfirm);
+
+replyConfirmModal?.addEventListener("click", (event) => {
+  if (event.target === replyConfirmModal) closeReplyConfirm();
+});
+
+replyConfirmSubmit?.addEventListener("click", () => {
+  if (activeReplyAction === "delete" && activeReplyRow) {
+    activeReplyRow.remove();
+  }
+  if (activeReplyAction === "publish" && activeReplyRow) {
+    activeReplyRow.dataset.replyStatus = "live";
+    const status = activeReplyRow.querySelector(".reply-status");
+    if (status) {
+      status.className = "reply-status live";
+      status.textContent = "进行中";
+    }
+  }
+  closeReplyConfirm();
 });
 
 const activityConfig = {

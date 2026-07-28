@@ -21,6 +21,7 @@
         <button class="nav-item" data-page="activity"><span>◇</span>活动配置</button>
         <button class="nav-item" data-page="inventory"><span>◒</span>奖品库存</button>
         <button class="nav-item" data-page="analytics"><span>▥</span>数据看板</button>
+        <button class="nav-item" data-page="replyTweet"><span>↩</span>Reply Tweet</button>
         <p>SYSTEM</p>
         <button class="nav-item" data-page="logs"><span>⊙</span>操作日志</button>
         <button class="nav-item" data-page="notice"><span>✉</span>公告推送</button>
@@ -557,7 +558,107 @@
           </section>
         </section>
       </section>
+      <section class="page" id="replyTweet">
+        <div class="reply-tweet-page">
+          <div class="reply-export-row">
+            <button class="reply-ghost">导出互动数据</button>
+          </div>
+
+          <div class="reply-metrics">
+            <article><span>全部推文</span><strong>24</strong><small>含各状态全部记录</small></article>
+            <article><span>进行中</span><strong class="reply-green">6</strong><small>用户端可见并可互动</small></article>
+            <article><span>草稿</span><strong>3</strong><small>仅后台可见</small></article>
+            <article><span>已过期</span><strong class="reply-muted-number">15</strong><small>已下架 · 记录保留</small></article>
+          </div>
+
+          <section class="reply-panel reply-editor">
+            <span class="reply-state-badge">草稿</span>
+            <div class="reply-panel-title">
+              <h2>上传推文</h2>
+              <p>推文发布后同步至 PI 端展示；保存草稿仅后台可见</p>
+            </div>
+            <div class="reply-form">
+              <label class="reply-full"><span class="reply-label-title">推文内容 <em>*</em></span>
+                <textarea placeholder="输入要发布到 PI 端的推文文字内容..."></textarea>
+              </label>
+              <label class="reply-full"><span class="reply-label-title">配图（选填，可多张）</span>
+                <button class="reply-upload" type="button">点击上传配图（PNG / JPG，建议 ≤ 2MB / 张）</button>
+              </label>
+              <label><span class="reply-label-title">推文标签 <em>*</em></span>
+                <select>
+                  <option>活动推文</option>
+                  <option>合作推文</option>
+                  <option>常规推文</option>
+                </select>
+              </label>
+              <label class="reply-switch-label"><span class="reply-label-title">有效期设置</span>
+                <button class="reply-switch" type="button" aria-label="永久有效开关"></button>
+                <span>永久有效（开启后过期时间不生效）</span>
+              </label>
+              <label class="reply-full"><span class="reply-label-title">过期时间（到期自动下架）</span>
+                <input value="2026-08-31 23:59" />
+              </label>
+              <label><span class="reply-label-title">评论奖励 <em>*</em>（首次评价可得）</span>
+                <div class="reply-inline-input"><input value="50" /><span>积分 / 首次</span></div>
+              </label>
+              <label><span class="reply-label-title">点赞奖励（首次点赞可得）</span>
+                <div class="reply-inline-input"><input value="10" /><span>积分 / 首次</span></div>
+              </label>
+            </div>
+            <p class="reply-rule">规则：单条推文每用户仅首次评价发放评价积分、首次点赞发放点赞积分，重复互动不重复计分；永久有效与过期时间互斥，均未设则默认为永久有效。发布后进入「进行中」，到期自动转「已过期」并下架。</p>
+            <div class="reply-actions">
+              <button class="reply-ghost">保存草稿</button>
+              <button class="reply-primary reply-confirm-open" data-confirm="publish">发布到 PI 端</button>
+            </div>
+          </section>
+
+          <section class="reply-panel reply-list-panel">
+            <div class="reply-filters">
+              <input placeholder="搜索推文内容 / ID..." />
+              <div class="reply-segmented">
+                <button class="active" data-reply-filter="all" type="button">全部</button>
+                <button data-reply-filter="draft" type="button">草稿</button>
+                <button data-reply-filter="live" type="button">进行中</button>
+                <button data-reply-filter="ended" type="button">已过期</button>
+              </div>
+              <select>
+                <option>全部时间</option>
+                <option>近 7 天</option>
+                <option>近 30 天</option>
+              </select>
+            </div>
+            <div class="reply-table">
+              <div class="reply-table-head"><span>排序调整</span><span>ID</span><span>推文内容</span><span>标签</span><span>积分(评/赞)</span><span>点赞</span><span>评价</span><span>过期时间</span><span>状态</span><span>创建/发布</span><span>操作</span></div>
+              <div data-reply-status="live">
+                <div class="sort-actions reply-sort"><button class="ghost mini reply-move-up" type="button">↑</button><button class="ghost mini reply-move-down" type="button">↓</button></div><strong>#T-108</strong><b>New DID feature is live 🚀<small>含配图 1 张</small></b><em class="reply-tag">活动</em><span class="reply-score">50 / 10</span><span>8,204</span><span>4,102</span><span>08-31 23:59</span><i class="reply-status live">进行中</i><span class="reply-date">发布 07-18</span><div class="reply-row-actions"><button>查看数据</button><button>编辑</button></div>
+              </div>
+              <div data-reply-status="live">
+                <div class="sort-actions reply-sort"><button class="ghost mini reply-move-up" type="button">↑</button><button class="ghost mini reply-move-down" type="button">↓</button></div><strong>#T-107</strong><b>Share your MEMO story and win points!<small>纯文字</small></b><em class="reply-tag neutral">合作</em><span class="reply-score">50 / 10</span><span>6,890</span><span>3,455</span><span class="reply-green">永久有效</span><i class="reply-status live">进行中</i><span class="reply-date">发布 07-15</span><div class="reply-row-actions"><button>查看数据</button><button>编辑</button></div>
+              </div>
+              <div data-reply-status="draft">
+                <span class="reply-sort">-</span><strong>#T-106</strong><b>DataDID x Pi Network - Reply to join<small>含配图 2 张</small></b><em class="reply-tag">活动</em><span class="reply-score">80 / 10</span><span>-</span><span>-</span><span>09-10 12:00</span><i class="reply-status draft">草稿</i><span class="reply-date">创建 07-20</span><div class="reply-row-actions"><button>编辑</button><button class="reply-confirm-open" data-confirm="publish">发布</button><button class="danger reply-confirm-open" data-confirm="delete">删除</button></div>
+              </div>
+              <div data-reply-status="ended">
+                <span class="reply-sort">-</span><strong>#T-102</strong><b>Christmas campaign recap 🎄<small>含配图 1 张</small></b><em class="reply-tag blue">常规</em><span class="reply-score">30 / 10</span><span>12,050</span><span>5,120</span><span>06-30 23:59</span><i class="reply-status ended">已过期</i><span class="reply-date">发布 05-28</span><div class="reply-row-actions"><button>查看数据</button></div>
+              </div>
+            </div>
+            <p class="reply-footnote">操作权限简述：草稿 → 编辑 / 发布 / 删除；进行中 → 查看数据 / 编辑（仅过期时间、积分奖励，不可改推文内容与配图）/ 上下箭头调整用户端展示顺序；已过期 → 仅查看数据。已发布推文不支持删除，仅随过期自动下架。所有发布 / 编辑 / 删除 / 排序写入操作日志。</p>
+          </section>
+        </div>
+      </section>
     </main>
+
+    <div class="modal-backdrop hidden" id="replyConfirmModal">
+      <div class="hash-modal reply-confirm-modal">
+        <h2 id="replyConfirmTitle">确认发布</h2>
+        <p id="replyConfirmText">确认发布该推文至用户端（PI 端）？</p>
+        <p id="replyConfirmHint">发布后用户可见并可互动，到期自动下架。</p>
+        <div class="modal-actions">
+          <button class="ghost" id="replyConfirmCancel">取消</button>
+          <button class="primary" id="replyConfirmSubmit">确认发布</button>
+        </div>
+      </div>
+    </div>
 
     <div class="modal-backdrop hidden" id="hashModal">
       <div class="hash-modal">
