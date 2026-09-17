@@ -7,7 +7,17 @@ const pageMeta = {
   inventory: ["奖品库存管理", "常规盲盒与活动盲盒奖池独立统计，追加库存写入操作日志。"],
   analytics: ["数据看板", "查看活动奖池消耗、USDT 名单、参与用户与排行榜快照。"],
   logs: ["操作日志", "追踪草稿、发布、奖池追加、延期、核验、发放与结算。"],
-  notice: ["公告推送", "配置首页 Banner、消息公告、登录弹窗和活动详情页内容。"]
+  notice: ["公告推送", "配置首页 Banner、消息公告、登录弹窗和活动详情页内容。"],
+  messages: ["消息管理", "查看用户反馈，跟进问题并及时回复用户。"]
+};
+
+const messageData = {
+  wallet: { user: "@luna_77", avatar: "LU", color: "purple", category: "账号与钱包", time: "2026-09-17 09:42", title: "钱包连接失败，一直提示网络错误", body: "你好，我在连接 Pi Wallet 时一直提示“Network request failed”。我已经重试好几次，也切换了网络，还是无法连接。请问怎么解决？", meta: "注册于 2026-05-18 · UID 880234" },
+  points: { user: "@alex_pi", avatar: "AP", color: "blue", category: "积分与奖励", time: "2026-09-17 09:10", title: "邀请好友后积分没有到账", body: "我的好友已经完成注册和 DID 创建，但邀请奖励还没有到账。可以帮我确认一下吗？", meta: "注册于 2026-06-02 · UID 882915" },
+  language: { user: "@mika_233", avatar: "MI", color: "amber", category: "产品建议", time: "2026-09-16 16:24", title: "日语页面有一处翻译不准确", body: "Reward Center 页面底部按钮的日语文案不太准确，建议修改为更自然的表达。", meta: "注册于 2026-03-11 · UID 861307" },
+  blindbox: { user: "@crypto_ben", avatar: "CB", color: "green", category: "盲盒活动", time: "2026-09-16 14:08", title: "盲盒中奖后多久发放？", body: "我抽中了 10 USDT，请问奖励一般多久会发放？", reply: "你好，USDT 奖励会在核验完成后的 3 个工作日内发放，请留意钱包到账通知。", meta: "注册于 2025-12-09 · UID 819026" },
+  did: { user: "@nova_x", avatar: "NX", color: "pink", category: "账号与钱包", time: "2026-09-15 11:31", title: "DID 创建失败", body: "创建 DID 时页面卡住了，重新进入后仍然没有记录。", reply: "我们已经修复了这条异常记录，现在可以重新创建 DID。", meta: "注册于 2026-07-22 · UID 891240" },
+  idea: { user: "@sam_web", avatar: "SW", color: "teal", category: "产品建议", time: "2026-09-14 18:06", title: "建议增加活动日历功能", body: "希望可以提前看到本月的所有活动，也能设置活动开始提醒。", reply: "谢谢你的建议！我们已将活动日历加入产品需求池。", meta: "注册于 2026-01-16 · UID 837415" }
 };
 
 const pageTitle = document.querySelector("#pageTitle");
@@ -26,6 +36,137 @@ function navigateToPage(id) {
 navItems.forEach((item) => {
   item.addEventListener("click", () => navigateToPage(item.dataset.page));
 });
+
+const messageList = document.querySelector("#messageList");
+const messageSearch = document.querySelector("#messageSearch");
+const messageReply = document.querySelector("#messageReply");
+const sendReply = document.querySelector("#sendReply");
+let activeMessageFilter = "all";
+
+function renderMessageDetail(id) {
+  const data = messageData[id];
+  const item = document.querySelector(`[data-message-id="${id}"]`);
+  if (!data || !item) return;
+  document.querySelectorAll(".message-item").forEach((node) => node.classList.toggle("active", node === item));
+  const avatar = document.querySelector("#detailAvatar");
+  avatar.textContent = data.avatar;
+  avatar.className = `message-avatar ${data.color}`;
+  document.querySelector("#detailUser").textContent = data.user;
+  document.querySelector("#detailUser + p").innerHTML = `<span class="online-dot"></span>${data.meta}`;
+  document.querySelector("#detailCategory").textContent = data.category;
+  document.querySelector("#detailTime").textContent = data.time;
+  document.querySelector("#replyToUser").textContent = data.user;
+  updateMessageStatusUI(item.dataset.status);
+  document.querySelector("#messageThread").innerHTML = `<div class="thread-day"><span>${data.time.slice(0, 10) === "2026-09-17" ? "今天" : data.time.slice(0, 10)}</span></div><div class="thread-entry user-message"><span class="message-avatar ${data.color}">${data.avatar}</span><div><div class="bubble"><strong>${data.title}</strong><p>${data.body}</p></div><time>${data.time.slice(-5)}</time></div></div>${data.reply ? `<div class="thread-entry admin-message"><div><div class="bubble"><strong>DataDID 客服</strong><p>${data.reply}</p></div><time>已回复</time></div><span class="message-avatar admin">OP</span></div>` : '<div class="thread-system"><span>系统已记录该反馈，等待运营回复</span></div>'}`;
+  messageReply.value = "";
+  messageReply.dispatchEvent(new Event("input"));
+}
+
+function updateMessageStatusUI(status) {
+  const label = document.querySelector("#messageStatusLabel");
+  const resolveButton = document.querySelector("#resolveMessage");
+  const labels = { pending: "待回复", replied: "已回复", resolved: "已解决" };
+  label.textContent = labels[status];
+  label.className = `message-status ${status}`;
+  resolveButton.disabled = status !== "replied";
+  resolveButton.textContent = status === "resolved" ? "✓ 已解决" : status === "replied" ? "标记为已解决" : "回复后可标记解决";
+}
+
+function updateMessageCounters() {
+  const items = [...document.querySelectorAll(".message-item")];
+  const pending = items.filter((item) => item.dataset.status === "pending").length;
+  const unread = items.filter((item) => item.dataset.unread === "true").length;
+  const pendingCount = document.querySelector('[data-message-filter="pending"] b');
+  const pendingMetric = document.querySelector("#pendingMetric");
+  const navCount = document.querySelector('[data-page="messages"] .nav-count');
+  if (pendingCount) pendingCount.textContent = pending;
+  if (pendingMetric) pendingMetric.textContent = pending;
+  if (navCount) {
+    navCount.textContent = unread;
+    navCount.hidden = unread === 0;
+  }
+}
+
+function markMessageRead(item) {
+  if (item.dataset.unread !== "true") return;
+  item.dataset.unread = "false";
+  item.querySelector(":scope > i")?.remove();
+  updateMessageCounters();
+}
+
+function filterMessages() {
+  const query = messageSearch.value.trim().toLowerCase();
+  let count = 0;
+  document.querySelectorAll(".message-item").forEach((item) => {
+    const visible = (activeMessageFilter === "all" || item.dataset.status === activeMessageFilter) && item.dataset.search.toLowerCase().includes(query);
+    item.hidden = !visible;
+    if (visible) count += 1;
+  });
+  document.querySelector("#messageResultCount").textContent = `共 ${count} 条`;
+  document.querySelector("#messageEmpty").classList.toggle("show", count === 0);
+}
+
+messageList?.addEventListener("click", (event) => {
+  const item = event.target.closest(".message-item");
+  if (item) {
+    markMessageRead(item);
+    renderMessageDetail(item.dataset.messageId);
+  }
+});
+messageSearch?.addEventListener("input", filterMessages);
+document.querySelectorAll("[data-message-filter]").forEach((button) => button.addEventListener("click", () => {
+  activeMessageFilter = button.dataset.messageFilter;
+  document.querySelectorAll("[data-message-filter]").forEach((node) => node.classList.toggle("active", node === button));
+  filterMessages();
+  const firstVisible = [...document.querySelectorAll(".message-item")].find((item) => !item.hidden);
+  if (firstVisible) renderMessageDetail(firstVisible.dataset.messageId);
+}));
+messageReply?.addEventListener("input", () => {
+  document.querySelector("#replyCount").textContent = messageReply.value.length;
+  sendReply.disabled = !messageReply.value.trim();
+});
+document.querySelector("#templateButton")?.addEventListener("click", () => document.querySelector("#quickReplies").classList.toggle("hidden"));
+document.querySelector("#quickReplies")?.addEventListener("click", (event) => {
+  const button = event.target.closest("button");
+  if (!button) return;
+  messageReply.value = button.textContent;
+  messageReply.dispatchEvent(new Event("input"));
+  document.querySelector("#quickReplies").classList.add("hidden");
+  messageReply.focus();
+});
+
+function submitMessageReply() {
+  if (!messageReply.value.trim()) return;
+  const item = document.querySelector(".message-item.active");
+  const id = item?.dataset.messageId;
+  if (!item || !id) return;
+  messageData[id].reply = messageReply.value.trim();
+  item.dataset.status = "replied";
+  markMessageRead(item);
+  const stateIcon = item.querySelector(".message-state-icon");
+  if (stateIcon) stateIcon.textContent = "↩";
+  else item.insertAdjacentHTML("beforeend", '<span class="message-state-icon">↩</span>');
+  renderMessageDetail(id);
+  const toast = document.querySelector("#messageToast");
+  toast.classList.add("show");
+  setTimeout(() => toast.classList.remove("show"), 2200);
+  filterMessages();
+  updateMessageCounters();
+}
+sendReply?.addEventListener("click", submitMessageReply);
+messageReply?.addEventListener("keydown", (event) => { if (event.ctrlKey && event.key === "Enter") submitMessageReply(); });
+document.querySelector("#resolveMessage")?.addEventListener("click", () => {
+  const item = document.querySelector(".message-item.active");
+  if (!item || item.dataset.status !== "replied") return;
+  item.dataset.status = "resolved";
+  const stateIcon = item.querySelector(".message-state-icon");
+  if (stateIcon) stateIcon.textContent = "✓";
+  updateMessageStatusUI("resolved");
+  filterMessages();
+  updateMessageCounters();
+});
+
+updateMessageCounters();
 
 const replySwitch = document.querySelector(".reply-switch");
 const replyConfirmModal = document.querySelector("#replyConfirmModal");

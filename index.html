@@ -25,6 +25,7 @@
         <p>SYSTEM</p>
         <button class="nav-item" data-page="logs"><span>⊙</span>操作日志</button>
         <button class="nav-item" data-page="notice"><span>✉</span>公告推送</button>
+        <button class="nav-item" data-page="messages"><span>◫</span>消息管理 <i class="nav-count">3</i></button>
       </nav>
 
       <div class="profile">
@@ -557,6 +558,75 @@
             <p class="notice-footnote">状态流：草稿 → 已排期（推送时间前可编辑 / 取消排期）→ 已推送（只读，可复制为新公告）。编辑与取消排期均写入操作日志；推送后消息中心即时可见。</p>
           </section>
         </section>
+      </section>
+      <section class="page" id="messages">
+        <div class="message-shell">
+          <div class="message-metrics">
+            <article><span>待回复</span><strong id="pendingMetric">3</strong><small>其中 1 条已等待超过 24 小时</small></article>
+            <article><span>今日新增</span><strong>8</strong><small>较昨日 +2</small></article>
+            <article><span>今日已回复</span><strong>12</strong><small>平均响应 36 分钟</small></article>
+            <article><span>已解决</span><strong>96.4%</strong><small>近 30 天反馈解决率</small></article>
+          </div>
+
+          <section class="panel message-workbench">
+            <aside class="message-inbox">
+              <div class="message-inbox-head">
+                <div><h2>用户反馈</h2><span id="messageResultCount">共 6 条</span></div>
+                <button class="message-icon-button" type="button" title="刷新">↻</button>
+              </div>
+              <div class="message-search"><span>⌕</span><input id="messageSearch" placeholder="搜索用户、主题或内容" /></div>
+              <div class="message-filter-row" role="tablist" aria-label="消息状态筛选">
+                <button class="active" data-message-filter="all">全部</button>
+                <button data-message-filter="pending">待回复 <b>3</b></button>
+                <button data-message-filter="replied">已回复</button>
+                <button data-message-filter="resolved">已解决</button>
+              </div>
+              <div class="message-list" id="messageList">
+                <button class="message-item active" data-message-id="wallet" data-status="pending" data-unread="true" data-search="luna_77 钱包连接失败 一直提示网络错误">
+                  <span class="message-avatar purple">LU</span><span class="message-item-body"><span><b>@luna_77</b><time>10 分钟前</time></span><strong>钱包连接失败，一直提示网络错误</strong><small>我已经重试好几次，还是无法连接...</small><em>账号与钱包</em></span><i></i>
+                </button>
+                <button class="message-item" data-message-id="points" data-status="pending" data-unread="true" data-search="alex_pi 积分没有到账 邀请奖励">
+                  <span class="message-avatar blue">AP</span><span class="message-item-body"><span><b>@alex_pi</b><time>42 分钟前</time></span><strong>邀请好友后积分没有到账</strong><small>好友已经完成注册和 DID 创建...</small><em>积分与奖励</em></span><i></i>
+                </button>
+                <button class="message-item" data-message-id="language" data-status="pending" data-unread="true" data-search="mika_233 日语翻译 页面显示">
+                  <span class="message-avatar amber">MI</span><span class="message-item-body"><span><b>@mika_233</b><time>昨天 16:24</time></span><strong>日语页面有一处翻译不准确</strong><small>Reward Center 的按钮文案...</small><em>产品建议</em></span><i></i>
+                </button>
+                <button class="message-item" data-message-id="blindbox" data-status="replied" data-search="crypto_ben 盲盒中奖 发放时间">
+                  <span class="message-avatar green">CB</span><span class="message-item-body"><span><b>@crypto_ben</b><time>昨天 14:08</time></span><strong>盲盒中奖后多久发放？</strong><small>你好，USDT 奖励会在核验完成后...</small><em>盲盒活动</em></span><span class="message-state-icon">↩</span>
+                </button>
+                <button class="message-item" data-message-id="did" data-status="resolved" data-search="nova_x did 创建失败 已解决">
+                  <span class="message-avatar pink">NX</span><span class="message-item-body"><span><b>@nova_x</b><time>09-15</time></span><strong>DID 创建失败</strong><small>已解决，谢谢你们的帮助。</small><em>账号与钱包</em></span><span class="message-state-icon">✓</span>
+                </button>
+                <button class="message-item" data-message-id="idea" data-status="replied" data-search="sam_web 建议 增加活动日历">
+                  <span class="message-avatar teal">SW</span><span class="message-item-body"><span><b>@sam_web</b><time>09-14</time></span><strong>建议增加活动日历功能</strong><small>希望可以提前看到本月的所有活动...</small><em>产品建议</em></span><span class="message-state-icon">↩</span>
+                </button>
+              </div>
+              <div class="message-empty" id="messageEmpty"><span>⌕</span><b>没有找到相关反馈</b><small>试试其他关键词或状态</small></div>
+            </aside>
+
+            <section class="message-detail" id="messageDetail">
+              <header class="message-detail-head">
+                <div><span class="message-avatar purple" id="detailAvatar">LU</span><div><h2 id="detailUser">@luna_77</h2><p><span class="online-dot"></span>注册于 2026-05-18 · UID 880234</p></div></div>
+                <div class="message-detail-actions"><span class="message-status pending" id="messageStatusLabel">待回复</span><button class="ghost mini" id="resolveMessage" disabled>回复后可标记解决</button></div>
+              </header>
+              <div class="message-context">
+                <div><span>反馈类型</span><strong id="detailCategory">账号与钱包</strong></div><div><span>来源</span><strong>Web · 简体中文</strong></div><div><span>提交时间</span><strong id="detailTime">2026-09-17 09:42</strong></div><div><span>关联版本</span><strong>Web v2.8.1</strong></div>
+              </div>
+              <div class="message-thread" id="messageThread">
+                <div class="thread-day"><span>今天</span></div>
+                <div class="thread-entry user-message"><span class="message-avatar purple">LU</span><div><div class="bubble"><strong>钱包连接失败，一直提示网络错误</strong><p>你好，我在连接 Pi Wallet 时一直提示“Network request failed”。我已经重试好几次，也切换了网络，还是无法连接。请问怎么解决？</p><div class="message-attachment"><span>▧</span><div><b>error_screenshot.png</b><small>PNG · 246 KB</small></div><button type="button">查看</button></div></div><time>09:42</time></div></div>
+                <div class="thread-system"><span>系统识别：可能与 Pi Wallet 网络节点有关</span></div>
+              </div>
+              <div class="message-reply-box">
+                <div class="reply-tools"><button type="button" id="templateButton">▤ 快捷回复</button><button type="button">♧ 添加附件</button><span>回复给 <b id="replyToUser">@luna_77</b></span></div>
+                <div class="quick-replies hidden" id="quickReplies"><button type="button">已收到，我们正在为你核查，请稍候。</button><button type="button">请尝试刷新页面并重新连接钱包。</button><button type="button">问题已处理，请再次尝试并告诉我们结果。</button></div>
+                <textarea id="messageReply" placeholder="输入回复内容…（Ctrl + Enter 快速发送）"></textarea>
+                <div class="reply-footer"><span><b id="replyCount">0</b> / 1000</span><div><button class="primary" id="sendReply" type="button" disabled>发送回复 <kbd>Ctrl ↵</kbd></button></div></div>
+              </div>
+            </section>
+          </section>
+        </div>
+        <div class="message-toast" id="messageToast">✓ 回复已发送</div>
       </section>
       <section class="page" id="replyTweet">
         <div class="reply-tweet-page">
